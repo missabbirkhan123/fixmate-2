@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProMarket | Real-time Messaging</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Use the provided Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffddb8",
+                    "on-primary-fixed": "#0f0069",
+                    "surface-bright": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-low": "#eff4ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#e2dfff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#ffd4a4",
+                    "on-secondary-container": "#00714d",
+                    "on-secondary-fixed": "#002113",
+                    "tertiary": "#684000",
+                    "secondary-container": "#6cf8bb",
+                    "background": "#f8f9ff",
+                    "surface": "#f8f9ff",
+                    "secondary-fixed-dim": "#4edea3",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#006c49",
+                    "on-background": "#0b1c30",
+                    "outline": "#777587",
+                    "on-surface-variant": "#464555",
+                    "on-secondary-fixed-variant": "#005236",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-primary-container": "#dad7ff",
+                    "inverse-primary": "#c3c0ff",
+                    "primary": "#3525cd",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e5eeff",
+                    "inverse-surface": "#213145",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#2a1700",
+                    "primary-container": "#4f46e5",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c7c4d8",
+                    "tertiary-fixed-dim": "#ffb95f",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-tertiary-fixed-variant": "#653e00",
+                    "surface-tint": "#4d44e3",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "surface-container-high": "#dce9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "sidebar-width": "280px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "sidebar-collapsed": "80px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .chat-scrollbar::-webkit-scrollbar { width: 4px; }
+        .chat-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .chat-scrollbar::-webkit-scrollbar-thumb { background: #c7c4d8; border-radius: 10px; }
+        .message-bubble-left { border-bottom-left-radius: 4px; }
+        .message-bubble-right { border-bottom-right-radius: 4px; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component Execution) -->
+<header class="bg-surface dark:bg-inverse-surface shadow-sm docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">ProMarket</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Marketplace</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Solutions</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-body-md text-body-md hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Pricing</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 text-on-surface-variant dark:text-surface-variant">
+<button class="p-2 hover:bg-surface-variant/20 rounded-full transition-all"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 bg-primary-container text-on-primary-container rounded-full transition-all"><span class="material-symbols-outlined">mail</span></button>
+<button class="p-2 hover:bg-surface-variant/20 rounded-full transition-all"><span class="material-symbols-outlined">settings</span></button>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional business headshot of a middle-aged woman with a friendly expression, wearing a tailored navy blazer and minimalist silver jewelry. The lighting is soft and corporate, set against a blurred high-end office background with clean white walls and subtle greenery. The overall aesthetic is professional, modern, and high-trust, perfectly matching a premium service marketplace profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByZcbOUzkHBlME5t2gv-uO2ZZaD7fTxll5C1GTsHAqS8yUAHmFWbrKMaYKWH3Iqp9xrwMRb4yjttxJOLgh62ZVhbCiT9rNwIZIZVu8vCu9SLgjiepOnHyP2QrhmRbtSpJ9F1JNORNf9RK-uBuzeo-yNN7uAI2L3gk7MMK_ZeXOR-PQBQiPJnChgRy9QZXo85PcrcfmOR_2uFDYFjFLwzqDxkog9OIyWNs_wlpW-rWyGIbyGltmQlbNq-xTPHx5A0UvfeNGltKhuOo"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 overflow-hidden relative">
+<!-- SideNavBar (Shared Component Execution) -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] w-sidebar-width bg-inverse-surface dark:bg-surface-container-low py-6 shrink-0">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1">work</span>
+</div>
+<div>
+<h2 class="font-headline-md text-[16px] text-white">Service Portal</h2>
+<p class="font-label-md text-label-md text-surface-variant">Enterprise Tier</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col">
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-label-md text-label-md">Services</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container border-l-4 border-primary transition-all" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Earnings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-4 border-t border-white/10 pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-surface-variant hover:bg-surface-variant/10 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error/10 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Messenger Interface -->
+<div class="flex-1 flex flex-col md:flex-row overflow-hidden bg-surface-container-lowest">
+<!-- Left Pane: Conversations List -->
+<div class="w-full md:w-[360px] border-r border-outline-variant flex flex-col bg-white">
+<div class="p-4 border-b border-outline-variant">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-xl text-body-sm focus:ring-2 focus:ring-primary/20" placeholder="Search conversations..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto chat-scrollbar">
+<!-- Active Chat Item -->
+<button class="w-full p-4 flex gap-4 bg-primary-container/10 border-r-2 border-primary text-left transition-colors">
+<div class="relative shrink-0">
+<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male tech consultant in his 30s, smiling with confidence. He is wearing a clean white t-shirt and modern glasses. The background is a soft-focus urban loft with industrial elements and natural sunlight. The image should feel bright, approachable, and highly professional to reflect a trustworthy service provider in a modern marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE97URqhwjEeL4opotwgZyRyvtc5hszDFNVf4ok9FUZlY-FLbbabi5ePy5C1tYe6cXKHnwmqZuEWBBcz1zKAZUPJBitRnNObRFP9leAbP9G1g9g4q08zXibrhXqDp3ul4miqOeoBzcr5MAmQqokhkLZ1HzpBa6-k5q5uFyIkFESdUQ1XNMEze3SVFHC_OpJOjOxWCo7_fUFC3PDs25h99JxbdVeKn1e4la6pxIDZ5Lr_AlGuPTOKIjt_VBUs7Jk6CpvAqhm_aVZGo"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Alex Rivera</h3>
+<span class="text-[11px] text-outline">2m ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant truncate font-medium">I've attached the final project files for your review...</p>
+</div>
+</button>
+<!-- Other Chat Items -->
+<button class="w-full p-4 flex gap-4 hover:bg-surface-container-low transition-colors text-left border-b border-outline-variant/30">
+<div class="relative shrink-0">
+<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A stylish young woman in a creative studio setting, holding a tablet and smiling. She has a vibrant, artistic look with colorful accessories. The lighting is warm and expressive, with splashes of teal and amber in the background. Professional creative freelancer aesthetic, emphasizing talent and modern service excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG3HuQrKE-LERWIUuqrMI2809SxvsO9Xqu74RgME1a_ZhX8hjLfP052vwircIIsRNOEPB5wC8sDsQLEQRAfS3RLkMhQdx0XrtFrlOWzrP3JQc7LwEbqDWDcEhbWIiGzXuzZRV6yjR2lH_oeQrxfc1Op7haVfHlueCWdc75Xosw8xD9V_84MRCtQ5Kvf7PUy4r1m0h3KD601dpywCGfH3dHgpppEuS8pylBJFtgF83vpK7mHihU6iSHYy9eH3gofLhVCQ9dnJBho-o"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-outline rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Sarah Jenkins</h3>
+<span class="text-[11px] text-outline">1h ago</span>
+</div>
+<p class="text-body-sm text-outline truncate">Great! Let me know if you need anything else.</p>
+</div>
+</button>
+<button class="w-full p-4 flex gap-4 hover:bg-surface-container-low transition-colors text-left border-b border-outline-variant/30">
+<div class="relative shrink-0">
+<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center bg-tertiary-fixed text-on-tertiary-fixed font-bold">
+                                JD
+                            </div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Jordan Design Co.</h3>
+<span class="text-[11px] text-outline">Yesterday</span>
+</div>
+<p class="text-body-sm text-outline truncate">The quote has been sent to your email address.</p>
+</div>
+</button>
+<button class="w-full p-4 flex gap-4 hover:bg-surface-container-low transition-colors text-left border-b border-outline-variant/30 opacity-70">
+<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of a professional architect, male, in a sophisticated grey studio. He is focused, looking slightly off-camera. Soft architectural lighting creates subtle shadows. High-end, precise, and authoritative vibe for a senior service provider profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnsEW9nd8YSReF2nmkmmnplgBh1r5Sd0MZgZZANemrC-EOQ46SmAVQSuBYHHo-wUHuo1yNtewPQE3R2igtwxbdegupu-vPZf5mOXCUGr91pdOGxJLjlFSXiPTZoJwto5iOSXmZtEiBECo2dz5amwUhjCjmpfKyCLmK5IBLirB2bISeJDRi-7dbMvpEGsVnSL3YTGRpvenPyqXVpur-oauZnGQvsxKPwERMebyDqPE_ZiirKBUyyZXgGzwLiuoFKUOkaXwx4Tz4440"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Michael Chen</h3>
+<span class="text-[11px] text-outline">3d ago</span>
+</div>
+<p class="text-body-sm text-outline truncate">Looking forward to our meeting on Monday.</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Right Pane: Active Conversation -->
+<div class="flex-1 flex flex-col relative bg-surface-bright">
+<!-- Chat Header -->
+<div class="h-16 px-6 border-b border-outline-variant flex items-center justify-between bg-white/80 backdrop-blur-md sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden ring-2 ring-primary/10">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male tech consultant in his 30s, smiling with confidence. He is wearing a clean white t-shirt and modern glasses. The background is a soft-focus urban loft with industrial elements and natural sunlight. The image should feel bright, approachable, and highly professional to reflect a trustworthy service provider in a modern marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvS7O7sJbTavnHlSSypDU4gx4V3QE6GkXgwG6lLc5FNGU88QgK3PhcAymCYXhaMl_qxtw3G3irJdED4I4heWJ-vXsU0KBKYCyt7BEHDkHlNrPiNzgNksRWqRwLW9lnh38W3GeXYBXyBL3_H60zKHJU0gX6WfVTgDFa7RGylKC98uSPHmKb8Em5fzFgkHGhKhwYAaWoQiRusbeoPJ2heAHrzZ2SuMg5DYbAtwVutMi0eXxvSxFFwdMnWSDhgmlj42dng2nKDXYwGo0"/>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">Alex Rivera</h2>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-[12px] text-outline">Online</span>
+</div>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</div>
+<!-- Chat Canvas -->
+<div class="flex-1 p-6 overflow-y-auto chat-scrollbar flex flex-col gap-6">
+<div class="flex justify-center">
+<span class="px-3 py-1 bg-surface-container-high text-outline text-[12px] rounded-full font-medium">Today</span>
+</div>
+<!-- Message Left -->
+<div class="flex gap-3 max-w-[80%] group">
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden self-end shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male tech consultant in his 30s, smiling with confidence. He is wearing a clean white t-shirt and modern glasses. The background is a soft-focus urban loft with industrial elements and natural sunlight. The image should feel bright, approachable, and highly professional to reflect a trustworthy service provider in a modern marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3fE9DtK5cti9omwoGWUQuveb4Hv8zqoGW0ndCgEsjbpmzzEZRYUtZYA31IL6k1gMi8gSMvOhvpYELrnlZcklNdfQgMGLQzaOuekcZqcchVjZRzi5O0-3il-VeICasMfNm8glsMTPSUNYctV1GAzqvaa7gw5ygTeOAt0cCn1oVFNg0gSuh9SoFIuTbgFxDW9SHUsUlckHIRBV0wajyCS5wdoRU0hShynjSY1qY0ssCtTG4XYz-XBqvUZFBlOW3uTFjRk9cvewcWGg"/>
+</div>
+<div>
+<div class="bg-white p-4 rounded-2xl message-bubble-left shadow-sm border border-outline-variant/20">
+<p class="text-body-md text-on-surface">Hi! I've finished the initial draft for the enterprise dashboard design. It focuses on the real-time messaging flow we discussed.</p>
+</div>
+<span class="text-[11px] text-outline mt-1 ml-1">10:24 AM</span>
+</div>
+</div>
+<!-- Message Right -->
+<div class="flex gap-3 max-w-[80%] self-end flex-row-reverse group">
+<div>
+<div class="bg-primary p-4 rounded-2xl message-bubble-right shadow-sm">
+<p class="text-body-md text-white">That sounds great, Alex! Does it include the attachment system for invoice verification?</p>
+</div>
+<div class="flex items-center justify-end gap-1 mt-1 mr-1">
+<span class="text-[11px] text-outline">10:26 AM</span>
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Message Left -->
+<div class="flex gap-3 max-w-[80%]">
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden self-end shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male tech consultant in his 30s, smiling with confidence. He is wearing a clean white t-shirt and modern glasses. The background is a soft-focus urban loft with industrial elements and natural sunlight. The image should feel bright, approachable, and highly professional to reflect a trustworthy service provider in a modern marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMJxCYj3SrroFTOnAoTmraW3owrQ50TJ59Ts5TxrihGmLZjKWZgCYm-ItMMZaSLOQaWz99O9_xkL-GGde5fb8NNt1yeqsz__QwSreIHiYRlHM7tu2zXUXrQ2tl7edsXSJsJOAK7R03uF4mjmLZ87bRFgBfH-leR0DEDvZ39-gsn951fzginyb3l1nM2PIxLuh0BnpUwDECWZ6RvWsdJeAnuM6rch8fhsw-DMobxwd-2Yy5xfQKuWxCa3yZ-TNxz4UVgdJwgU6k418"/>
+</div>
+<div>
+<div class="bg-white p-4 rounded-2xl message-bubble-left shadow-sm border border-outline-variant/20">
+<p class="text-body-md text-on-surface">Yes, it does. I've used a clean pill-style badge system for the status tracking as well. Here are the screenshots.</p>
+<div class="mt-3 grid grid-cols-2 gap-2">
+<div class="aspect-video bg-slate-100 rounded-lg overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A sophisticated UI/UX dashboard screenshot for a high-end service marketplace. It shows clean data visualizations, soft amber and teal status badges, and an elegant sidebar navigation. The design uses a crisp white background with indigo primary accents, exhibiting high-trust corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmhDdCvul5VXZWBjmHd1P0CztXU9nSGoKJKdAIwXuEv49ddpXFcWTd70tqI1lNwRoh5MxadSGtC1Ny5HQBVL6mZz0zEKDnxNp05-nihlbdIl9U_WCGbbUwoM_UUCudrgEAe59sIm9pek5Iy9pbbWBDJyMiBHba_gpPIRfN7iAb5yOjL2b0CRGtCw2LP3z9X6c2O4q5Gyl7kJZi90T9EoGOhY6L-AVBuQej5DJzSVTCFGXFH05MOnMS4n4mnMlJhfgt9t7QtT04GsM"/>
+</div>
+<div class="aspect-video bg-slate-100 rounded-lg overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A detailed view of a mobile messaging interface design with soft shadows, premium typography, and a refined color palette of deep indigo and slate. The interface looks modern, clean, and highly functional for professional enterprise communication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC375zb7OUn5ALeJzCLDxYY80pEwcS-BldGBrcoS_PMzOknrNL1ZhTrwTMEeLjgm9eDXqb-rcMtVJQRhKNmPAk1jdr9WvoRDcGW-jmmz2fkwWSlbj0N1zOS9EHQw1ny_9uZudeehJvSos8JtqCEtWr8gXximeLDhm7i4qnQlQje9iobQyDGELy3cWlKkTQGpWDD5UGUvwPubPMFdVS7Vreq3U19MuYy5qfFNqvh74GIJZlXSicLgzoikhHvR1ybwjuboBdcROHGCcg"/>
+</div>
+</div>
+</div>
+<span class="text-[11px] text-outline mt-1 ml-1">10:28 AM</span>
+</div>
+</div>
+<!-- Message Right (New) -->
+<div class="flex gap-3 max-w-[80%] self-end flex-row-reverse">
+<div>
+<div class="bg-primary p-4 rounded-2xl message-bubble-right shadow-sm">
+<p class="text-body-md text-white">Perfect. I'll review these now and get back to you by end of day.</p>
+</div>
+<div class="flex items-center justify-end gap-1 mt-1 mr-1">
+<span class="text-[11px] text-outline">Just now</span>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="p-4 bg-white border-t border-outline-variant">
+<div class="max-w-4xl mx-auto flex items-end gap-3">
+<div class="flex gap-1 shrink-0 pb-1">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">image</span>
+</button>
+</div>
+<div class="flex-1 relative">
+<textarea class="w-full px-4 py-3 bg-surface-container-low border-none rounded-2xl text-body-md focus:ring-2 focus:ring-primary/20 resize-none max-h-32 chat-scrollbar" oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'" placeholder="Type your message..." rows="1"></textarea>
+</div>
+<button class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">send</span>
+</button>
+</div>
+<p class="text-center text-[11px] text-outline mt-2">Enter to send, Shift + Enter for new line</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Suppression Logic: 
+         Messenger is a Task-Focused/Focused Journey screen. 
+         Global navigation/footer suppressed as per "The Destination Rule" and "The UX Goal" in requirements.
+    -->
+<script>
+        // Simple micro-interaction for the send button
+        document.querySelector('button.bg-primary').addEventListener('click', function() {
+            const textarea = document.querySelector('textarea');
+            if (textarea.value.trim() !== "") {
+                textarea.value = "";
+                textarea.style.height = 'auto';
+                // Logic for adding message would go here
+            }
+        });
+
+        // Toggle Dark Mode (Optional Helper)
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body></html>

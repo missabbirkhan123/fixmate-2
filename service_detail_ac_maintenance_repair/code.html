@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional AC Maintenance | ProMarket</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffddb8",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-bright": "#f8f9ff",
+                        "on-surface": "#0b1c30",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-container": "#885500",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#e2dfff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ffd4a4",
+                        "on-secondary-container": "#00714d",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary": "#684000",
+                        "secondary-container": "#6cf8bb",
+                        "background": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#006c49",
+                        "on-background": "#0b1c30",
+                        "outline": "#777587",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-primary-container": "#dad7ff",
+                        "inverse-primary": "#c3c0ff",
+                        "primary": "#3525cd",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "inverse-surface": "#213145",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#2a1700",
+                        "primary-container": "#4f46e5",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-tint": "#4d44e3",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-high": "#dce9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "sidebar-width": "280px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "sidebar-collapsed": "80px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 12px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .shadow-level-1 {
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.06);
+        }
+        .shadow-level-2:hover {
+            box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1), 0px 4px 6px -2px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-surface docked full-width top-0 shadow-sm sticky z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary">ProMarket</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="#">Marketplace</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Solutions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Pricing</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant">mail</span>
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</div>
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md">Get Started</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional high-resolution headshot of a friendly business user for a SaaS marketplace profile, shot in soft natural light against a neutral gray office background, clean and corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBREWcaFb350uxhBjIDJFDArA2BYDqwv6FPyC8Uq_yMs7BAPEHc9LOHZkbYM-cloTt9pn67X4beRx6AcrRDoZqTOAzXTzYPKiNkz55WZNpP_ykiGGMmqiHMB0ENgSIQgjEZHX9yeCa2cASmBxEkQKLiw3KuNKWa3OnVFxIoCmi8xU_OsxyEhrwWJjXrp18whfh1sH02jvLe3_tLzyEw5TgY4qTVH7B8kawInTFsKjzC_SuB-Vgt8rAd6ft_C06Oe7NpoASkivTixm8"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-desktop py-8">
+<!-- Breadcrumb & Header -->
+<div class="mb-8">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm mb-4">
+<span>Marketplace</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Home Services</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">AC Maintenance</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Professional AC Maintenance &amp; Deep Cleaning</h1>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full font-label-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.8</span>
+<span class="opacity-70">(124 Reviews)</span>
+</div>
+<span class="text-on-surface-variant font-body-sm">•</span>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Dhaka Metro, Bangladesh</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-start md:items-end">
+<span class="text-on-surface-variant font-label-sm">Starting at</span>
+<div class="text-primary font-headline-lg text-headline-lg font-bold">৳ 2,499.00</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Main Content -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Image Gallery (Asymmetric Layout) -->
+<div class="grid grid-cols-12 grid-rows-2 gap-3 h-[450px]">
+<div class="col-span-8 row-span-2 rounded-xl overflow-hidden shadow-level-1 relative group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional technician in a clean navy uniform meticulously servicing a wall-mounted modern air conditioning unit in a bright, contemporary living room. Soft afternoon sunlight filters through windows, emphasizing a clean, trusted service environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJOHENc5yCeRx3EuwyDURMx1sm1T0YZrhf6rjozogkZ26OrDTP_z6V4AlAFnTR9SGukPHt3gI9fvGD_5QXfRJqleRBI8YOwo5DvDDiWbmJ_QFxUQvJado0G4AFi7GcQiYdQHyUMzR7qmWL7UN0O0bp7UW5K0KsHiovpGdvqt7eaLdTW7QhTTgTkIpqRTRnRkEXPcH8kgyocnUnuvHsRW5AK9a-YzwI-dEGtnJUh1n9N1BCwh7GPJvA2abh-efHk8pWyDwZe5zq8V8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="col-span-4 row-span-1 rounded-xl overflow-hidden shadow-level-1 group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up macro shot of a clean, shimmering air conditioner filter being sprayed with a specialized cleaning solution. The lighting is crisp and cool, highlighting the precision and hygienic nature of the maintenance service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG5AIC0cAVBeZjJlyhrGEUD0_kGdsNunad8ZklzdOU-Zt40PTQWcYB6Wg1l959-TcwfQc1gZpXH2jag0aYNNjSQVL2qeFeyWHXug_NzfY3NGWh-tyMU9o7mL1fKhpxgDWLNeGQlPGGeLQvX2mmZOK3yIuQM8o4sAABJUnjIWPVqcISphO6rclxTJo2kfxGtZioqlf9MrxzDY6-EGVjMHAlWqP2r8SNhSYNxzJm--GgEkwOC6QGN4Pdr85WmXskOzgl4MNeyzVM5nQ"/>
+</div>
+<div class="col-span-4 row-span-1 rounded-xl overflow-hidden shadow-level-1 relative group cursor-pointer">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A set of professional digital gauges and tools connected to an AC outdoor compressor unit. The scene is bright and professional, suggesting technical expertise and enterprise-grade equipment used for HVAC maintenance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5fydKJirsCdwnpudsSvVSKxqiTA7eCyjuLwGrN44WD_N-500v0n1dmhIaFc3OfsGrrE6_Qi2Mo8-I4IPEDosVB7QeqF-fx8mTfjgHCcEEEg7giGBri-N4pti3zliBlyUHG5jIw-F21wCE5TEy6qc7ochwLgGL9CndPdIgLLQIaARcB-p--Nx1BF5tWFOW8kM5pmM0N36Y2fUJLqyUBbBdK3LgVtJPSzR5Oqxupyty8SLTmQlNFttJO8od9ZF83hxksMEyyv6r-FQ"/>
+<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-label-md">
+<span>+ 5 More</span>
+</div>
+</div>
+</div>
+<!-- Description Card -->
+<div class="bg-surface-container-lowest p-gutter rounded-xl shadow-level-1 border border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Service Description</h3>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-4">
+<p>Keep your environment cool and healthy with our comprehensive AC maintenance service. Our certified technicians provide a 21-point inspection and deep cleaning process designed to improve air quality and maximize energy efficiency.</p>
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Complete indoor and outdoor unit chemical wash</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Refrigerant (Gas) pressure check and top-up</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Drainage pipe leakage &amp; blockage clearing</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Electrical wiring and connection inspection</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Service Areas (Bento Style) -->
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Service Areas</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant flex flex-col items-center text-center hover:bg-primary-container hover:text-on-primary-container transition-all cursor-default">
+<span class="material-symbols-outlined mb-2">apartment</span>
+<span class="font-label-md">Gulshan 1 &amp; 2</span>
+</div>
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant flex flex-col items-center text-center hover:bg-primary-container hover:text-on-primary-container transition-all cursor-default">
+<span class="material-symbols-outlined mb-2">location_city</span>
+<span class="font-label-md">Banani</span>
+</div>
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant flex flex-col items-center text-center hover:bg-primary-container hover:text-on-primary-container transition-all cursor-default">
+<span class="material-symbols-outlined mb-2">home</span>
+<span class="font-label-md">Uttara</span>
+</div>
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant flex flex-col items-center text-center hover:bg-primary-container hover:text-on-primary-container transition-all cursor-default">
+<span class="material-symbols-outlined mb-2">domain</span>
+<span class="font-label-md">Dhanmondi</span>
+</div>
+</div>
+</div>
+<!-- Reviews -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Client Reviews</h3>
+<button class="text-primary font-label-md hover:underline">View All Reviews</button>
+</div>
+<div class="space-y-4">
+<!-- Review 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm transition-all hover:shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-dim overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a satisfied middle-aged male customer for a service review. He looks professional and content, wearing a casual shirt, in a home office setting with warm lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXdxDjkXIKuY9LLd7uX63Ahdp-q68GtTsMhJIRJWNqX4dKnplzmS59pa8ZsxdDGZ05lz4mYWEbTEeej8mtY-LosdZkrWkdu4OejtNAyNIT8jDVpfBBvcI2cZXyKXP8TCUuZbwguPyOt-MOtR0gXlwVEf54thD1G34sR067nBFDf3dIXjcLf_T4IZ-ev5mQvLfxDvrts1D0TMVw1cc8Hnbwyzzx2maPLq7sN166f8Ykc-W6rhpIdqX_QKDeygPKSBff7FjRE3CoVlc"/>
+</div>
+<div>
+<div class="font-label-md text-on-surface">Rahat Khan</div>
+<div class="flex text-tertiary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div></div></div></div></div></div></div></div></div></main></body></html>

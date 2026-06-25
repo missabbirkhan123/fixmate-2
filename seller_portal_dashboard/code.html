@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ProMarket | Seller Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffddb8",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-bright": "#f8f9ff",
+                        "on-surface": "#0b1c30",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-container": "#885500",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#e2dfff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ffd4a4",
+                        "on-secondary-container": "#00714d",
+                        "on-secondary-fixed": "#002113",
+                        "tertiary": "#684000",
+                        "secondary-container": "#6cf8bb",
+                        "background": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#006c49",
+                        "on-background": "#0b1c30",
+                        "outline": "#777587",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-primary-container": "#dad7ff",
+                        "inverse-primary": "#c3c0ff",
+                        "primary": "#3525cd",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "inverse-surface": "#213145",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#2a1700",
+                        "primary-container": "#4f46e5",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-tint": "#4d44e3",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-high": "#dce9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "sidebar-width": "280px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "sidebar-collapsed": "80px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            box-shadow: inset 4px 0 0 0 #3525cd;
+        }
+        .card-shadow {
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.06);
+        }
+        .card-shadow:hover {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.08), 0px 2px 4px rgba(0,0,0,0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation Shell -->
+<aside class="hidden md:flex flex-col h-screen w-sidebar-width fixed left-0 top-0 bg-inverse-surface dark:bg-surface-container-low py-6 z-50" id="side-nav">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md text-on-primary-fixed">ProMarket</h1>
+<p class="text-surface-variant font-label-md">Service Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container border-l-4 border-primary font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+                My Services
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                Orders
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+                Messages
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Earnings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+                Analytics
+            </a>
+</nav>
+<div class="mt-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-on-surface-variant/10 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-error-container/80 hover:text-error-container hover:bg-error-container/10 transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-sidebar-width min-h-screen p-margin-mobile md:p-margin-desktop">
+<!-- Header TopBar -->
+<header class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg md:text-headline-lg-mobile lg:text-headline-lg">Welcome back, Sarah</h2>
+<p class="text-on-surface-variant font-body-md">Manage your services and track business growth.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary-fixed flex items-center justify-center border-2 border-primary/20">
+<span class="text-primary font-bold">SK</span>
+</div>
+</div>
+</header>
+<!-- CRITICAL GATEWAY: Pending Approval State -->
+<section class="mb-gutter" id="approval-banner">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed p-6 rounded-xl border border-tertiary-container/20 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-tertiary">Complete Your Setup</h3>
+<p class="font-body-md">Your payment verification is pending. Manual payment via bKash or Nagad is required to unlock listing creation.</p>
+</div>
+</div>
+<button class="whitespace-nowrap px-6 py-3 bg-tertiary text-on-tertiary rounded-lg font-label-md hover:opacity-90 transition-all active:scale-95 shadow-lg" onclick="toggleSetupState()">
+                    Submit Payment Details
+                </button>
+</div>
+</section>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-gutter">
+<div class="bg-surface-container-lowest p-6 rounded-xl card-shadow border border-outline-variant/30 transition-transform hover:-translate-y-1">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+</div>
+<span class="text-secondary font-label-md bg-secondary-container/20 px-2 py-1 rounded">+12%</span>
+</div>
+<p class="text-on-surface-variant font-label-md mb-1 uppercase tracking-wider">Active Listings</p>
+<h4 class="font-display-lg text-display-lg">08</h4>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl card-shadow border border-outline-variant/30 transition-transform hover:-translate-y-1">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary/10 text-tertiary rounded-lg">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<span class="text-error font-label-md bg-error-container/20 px-2 py-1 rounded">-4%</span>
+</div>
+<p class="text-on-surface-variant font-label-md mb-1 uppercase tracking-wider">Customer Inquiries</p>
+<h4 class="font-display-lg text-display-lg">24</h4>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl card-shadow border border-outline-variant/30 transition-transform hover:-translate-y-1">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary/10 text-secondary rounded-lg">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<span class="text-secondary font-label-md bg-secondary-container/20 px-2 py-1 rounded">+28%</span>
+</div>
+<p class="text-on-surface-variant font-label-md mb-1 uppercase tracking-wider">Total Earnings</p>
+<h4 class="font-display-lg text-display-lg">৳45.2k</h4>
+</div>
+</div>
+<!-- Listing Management Section -->
+<section class="opacity-40 pointer-events-none transition-opacity duration-500" id="listing-management">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md">Service Listings</h3>
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary/90 transition-all shadow-md">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Create New Service
+                </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Listing Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden card-shadow border border-outline-variant/30 group">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="A professional workspace for a high-end web design agency. The scene features multiple monitors displaying sleek user interface code and Figma designs, set in a bright modern office with minimalist decor and clean lines. The lighting is crisp and natural, highlighting a sophisticated corporate blue and white color palette." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuClxKhE02eq88ON-4oC1ndL-WgYFYtNvOQ-wX1gS61cwH-mi3YB4uvDs2pLqnu6SMqED02cTKTsi5JsaSqN9FzP9XsUL9gWaUC1RZIhuToXgNJlRUGuxLKuqwdKNBJFuvNvM6X9-0iHi3F40e5kZGG4DyKv0Hh9FhTkvL7UvCB4ISz6nbNDcrtkXcskT2gDoSUaktS9ID2wV29wQensluVNKhmrWO3xqOle-33_NErs9Le8VjoiwbGDmbs5i-UuNFJM_Weakg7-zX4')">
+<div class="absolute top-4 right-4 bg-secondary-container/90 text-on-secondary-container px-3 py-1 rounded-full font-label-sm">Approved</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Enterprise UI/UX Design System</h4>
+<div class="flex items-center gap-4 text-on-surface-variant font-label-md mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="payments">payments</span> ৳12,000</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span> 14 Days</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md">4.9 (12)</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Listing Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden card-shadow border border-outline-variant/30 group">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="A top-down view of a modern desk setup for a software developer. High-quality keyboard, a tablet with wireframes, and a cup of coffee are neatly arranged. The background is a clean, neutral gray with subtle blue accents, creating a calm and professional atmosphere. Soft daylight spills across the desk surface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvWJoOYjxqASEwxWlFqkYYasQBTl6aMMPWHHkcd-w2DlfxbZt0cemxO5wM5FxM4haTXnRuC1GJgDLipM3cCanE6gR6hcW19t7vDBkkwtOPvOZ4-3niDiruL_a5zqqne-ePKU3CziDpDbQdLnG6zVVJG14dZ8rsD6oPgoibycb-xl1O2_oUXLVkxbMfyBpKGUSPNbgAkXfGZFO7oepFnoiDExGkaddcadAgF39TlfjN4erHtSkoEbAAvFjJolNHzTreWvwzgSnu6kA')">
+<div class="absolute top-4 right-4 bg-tertiary-container/10 text-tertiary px-3 py-1 rounded-full font-label-sm">Draft</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-2 group-hover:text-primary transition-colors">Custom React Dashboard Build</h4>
+<div class="flex items-center gap-4 text-on-surface-variant font-label-md mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="payments">payments</span> ৳8,500</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span> 7 Days</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-1 text-on-surface-variant italic">
+<span class="font-label-md">No ratings yet</span>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="edit">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Style Insight Card -->
+<div class="bg-primary-container text-on-primary-container p-6 rounded-xl flex flex-col justify-between relative overflow-hidden h-full group">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-[48px] mb-4 opacity-50" data-icon="rocket_launch">rocket_launch</span>
+<h4 class="font-headline-md text-headline-md mb-2">Boost Your Reach</h4>
+<p class="font-body-sm opacity-90 mb-6">Verified sellers see a 3x increase in enterprise inquiries. Finish your profile to get featured.</p>
+</div>
+<button class="relative z-10 w-full py-3 bg-on-primary-container text-primary rounded-lg font-label-md hover:bg-surface-bright transition-colors">
+                        View Recommendations
+                    </button>
+<!-- Decorative background element -->
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+</div>
+</div>
+</section>
+<!-- Recent Orders Table -->
+<section class="mt-gutter">
+<div class="bg-surface-container-lowest rounded-xl card-shadow border border-outline-variant/30 overflow-hidden">
+<div class="p-6 border-b border-outline-variant/30 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md">Recent Orders</h3>
+<button class="text-primary font-label-md hover:underline transition-all">View All Orders</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Client</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Service</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Amount</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase tracking-wider">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-dim flex items-center justify-center font-bold text-xs">RJ</div>
+<div>
+<p class="font-label-md text-on-surface">Rahim J.</p>
+<p class="text-xs text-on-surface-variant">Enterprise Client</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-sm">Landing Page Redesign</td>
+<td class="px-6 py-4 font-label-md">৳4,500</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-secondary-container/20 text-secondary text-[11px] font-bold">IN PROGRESS</span>
+</td>
+<td class="px-6 py-4">
+<button class="text-primary hover:text-primary/70 transition-colors"><span class="material-symbols-outlined" data-icon="visibility">visibility</span></button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-dim flex items-center justify-center font-bold text-xs">AS</div>
+<div>
+<p class="font-label-md text-on-surface">Ayesha S.</p>
+<p class="text-xs text-on-surface-variant">Startup Founder</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-sm">Logo Design Package</td>
+<td class="px-6 py-4 font-label-md">৳2,000</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-tertiary-container/10 text-tertiary text-[11px] font-bold uppercase">Pending Payment</span>
+</td>
+<td class="px-6 py-4">
+<button class="text-primary hover:text-primary/70 transition-colors"><span class="material-symbols-outlined" data-icon="visibility">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<!-- Mobile Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant/30 flex justify-around py-3 px-4 z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="text-[10px] font-label-sm">Services</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="text-[10px] font-label-sm">Inbox</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-[10px] font-label-sm">Wallet</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="md:ml-sidebar-width bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant py-12">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div>
+<h4 class="font-headline-md text-headline-md font-black text-on-surface mb-2">ProMarket</h4>
+<p class="text-on-surface-variant font-body-sm">© 2024 ProMarket Enterprise Solutions. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap gap-6 md:justify-end">
+<a class="text-on-surface-variant font-body-sm hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-body-sm hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-body-sm hover:text-primary underline transition-all" href="#">Cookie Policy</a>
+<a class="text-on-surface-variant font-body-sm hover:text-primary underline transition-all" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple logic for the demo: Toggle between "Pending Approval" and "Approved" state
+        let isApproved = false;
+
+        function toggleSetupState() {
+            isApproved = !isApproved;
+            const banner = document.getElementById('approval-banner');
+            const listings = document.getElementById('listing-management');
+            
+            if (isApproved) {
+                banner.style.display = 'none';
+                listings.classList.remove('opacity-40', 'pointer-events-none');
+                
+                // Show success toast-like notification
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-24 right-8 bg-secondary text-on-secondary px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transition-all transform translate-y-0 z-[100]';
+                toast.innerHTML = `<span class="material-symbols-outlined">check_circle</span> <span class="font-label-md">Payment Verified! Your services are now live.</span>`;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-4');
+                    setTimeout(() => toast.remove(), 500);
+                }, 4000);
+
+            } else {
+                banner.style.display = 'block';
+                listings.classList.add('opacity-40', 'pointer-events-none');
+            }
+        }
+
+        // Initialize view based on state
+        document.addEventListener('DOMContentLoaded', () => {
+            // Default is unapproved for the gateway demonstration
+        });
+    </script>
+</body></html>

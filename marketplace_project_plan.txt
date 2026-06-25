@@ -1,0 +1,20 @@
+# Multi-Vendor Service Marketplace PRD
+
+## Core Flows
+1. **Onboarding**: Split registration for Buyers and Sellers with admin approval gate.
+2. **Payment**: Manual verification (bKash/Nagad/Rocket) before sellers can list.
+3. **Marketplace**: Searchable, filterable directory of services with real-time chat.
+4. **Dashboards**: Distinct experiences for Admin (management), Seller (listings), and Buyer (bookings).
+
+## Proposed Screens
+1. **Landing Page**: Search-focused hero, category grid, and onboarding CTAs.
+2. **Admin Dashboard**: Overview stats and the critical "Pending Approvals" management queue.
+3. **Seller Dashboard**: Listing management and the payment status gateway.
+4. **Service Listing Detail**: Service info, seller profile, and "Send Message" interaction.
+5. **Real-time Chat**: Inbox and messaging interface.
+
+## Tech Stack (Design Focus)
+- Modern SaaS aesthetic
+- Dark/Light mode support
+- ShadCN UI inspired components
+- Mobile-first responsive layouts
