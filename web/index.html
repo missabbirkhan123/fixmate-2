@@ -1,147 +1,177 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="dark" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Fixmate | Professional Service Marketplace</title>
+    <meta name="description" content="Fixmate - Professional Multi-Vendor Service Marketplace."/>
+    <title>Fixmate | Modern Service Marketplace</title>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
     <script id="tailwind-config">
           tailwind.config = {
             darkMode: "class",
             theme: {
               extend: {
                 colors: {
-                    "primary": "#3525cd",
-                    "background": "#f8f9ff",
-                    "surface": "#ffffff"
+                    "primary": "#ff1f71",
+                    "accent": "#ff8e3c",
+                    "dark-bg": "#0b0e14",
+                    "glass": "rgba(255, 255, 255, 0.03)",
+                    "glass-border": "rgba(255, 255, 255, 0.08)"
                 }
               }
             }
           }
     </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b0e14; color: #ffffff; }
+        .mesh-bg {
+            background: radial-gradient(circle at 10% 20%, rgba(255, 31, 113, 0.1) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 142, 60, 0.08) 0%, transparent 40%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #ff1f71, #ff8e3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-link { color: rgba(255, 255, 255, 0.6); transition: all 0.3s; }
+        .nav-link:hover { color: #ffffff; }
+    </style>
 </head>
-<body class="bg-background text-slate-900 antialiased">
-    <header class="bg-surface sticky top-0 z-50 border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-8">
-                <a href="index.html" class="text-2xl font-black text-primary">Fixmate</a>
-                <nav class="hidden md:flex gap-6">
-                    <a href="index.html" class="text-primary font-bold">Marketplace</a>
-                    <a href="seller.html" class="text-slate-500 hover:text-primary transition-all">For Sellers</a>
-                </nav>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="signin.html" class="text-sm font-bold text-slate-600 hover:text-primary transition-all">Sign In</a>
-                <a href="signup.html" class="px-5 py-2 bg-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">Get Started</a>
+<body class="antialiased">
+    <div class="mesh-bg"></div>
+
+    <!-- Dynamic Navigation -->
+    <nav class="sticky top-0 z-50 border-b border-glass-border bg-dark-bg/60 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-12">
+                    <a href="/" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
+                        <div class="w-8 h-8 bg-gradient-to-tr from-primary to-accent rounded-lg rotate-12"></div>
+                        Fixmate
+                    </a>
+                    <div class="hidden lg:flex items-center gap-8 text-sm font-semibold">
+                        <a href="#" class="nav-link underline decoration-primary decoration-2 underline-offset-8">Marketplace</a>
+                        <a href="#" class="nav-link">For Buyers</a>
+                        <a href="#" class="nav-link">Become a Seller</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="signin.html" class="hidden sm:block text-sm font-bold nav-link">Log In</a>
+                    <a href="signup.html" class="px-6 py-2.5 bg-white text-dark-bg rounded-full text-sm font-bold hover:scale-105 transition-all">Get Started</a>
+
+                    <div class="flex gap-2 ml-4 pl-4 border-l border-glass-border">
+                        <span class="material-symbols-outlined text-white/40 cursor-pointer hover:text-white">notifications</span>
+                        <span class="material-symbols-outlined text-white/40 cursor-pointer hover:text-white">shopping_cart</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <main>
+    <main class="relative px-6">
         <!-- Hero Section -->
-        <section class="py-20 px-4 text-center">
-            <div class="max-w-4xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-bold mb-6">
-                    <span class="material-symbols-outlined text-sm">verified</span>
-                    Trusted by 10,000+ homeowners
-                </div>
-                <h1 class="text-5xl md:text-6xl font-black mb-8 leading-tight">
-                    Find the perfect <span class="text-primary">professional</span> for your home needs
-                </h1>
+        <section class="max-w-5xl mx-auto pt-24 pb-32 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 glass-card rounded-full text-xs font-bold tracking-wide mb-8">
+                <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                Trusted by 10,000+ Verified Experts
+            </div>
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-10 leading-[1.05] tracking-tight">
+                Hire Your Next <span class="text-gradient">Service</span> Experts.
+            </h1>
+            <p class="text-lg md:text-xl text-white/50 mb-12 max-w-2xl mx-auto leading-relaxed">
+                The ultimate marketplace to connect homeowners with maintenance pros. Fast, secure, and built for the future.
+            </p>
 
-                <!-- Search Box -->
-                <div class="max-w-3xl mx-auto bg-white p-2 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-2">
-                    <div class="flex-1 flex items-center gap-3 px-4 py-3 bg-slate-50 rounded-xl border border-slate-200">
-                        <span class="material-symbols-outlined text-slate-400">search</span>
-                        <input type="text" placeholder="What service do you need today?" class="w-full bg-transparent border-none focus:ring-0 text-sm">
-                    </div>
-                    <button class="px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-                        Search
-                    </button>
+            <!-- Advanced Search Bar (Screenshot Style) -->
+            <div class="max-w-3xl mx-auto glass-card p-2 rounded-2xl flex flex-col md:flex-row gap-2 shadow-2xl">
+                <div class="flex-[2] flex items-center gap-3 px-6 py-4 rounded-xl focus-within:bg-white/5 transition-all">
+                    <span class="material-symbols-outlined text-white/30">search</span>
+                    <input type="text" placeholder="What service do you need?" class="w-full bg-transparent border-none focus:ring-0 text-white placeholder:text-white/20 font-medium">
                 </div>
+                <div class="flex-1 flex items-center gap-3 px-6 py-4 rounded-xl border-l border-glass-border">
+                    <span class="material-symbols-outlined text-white/30">location_on</span>
+                    <select class="w-full bg-transparent border-none focus:ring-0 text-white/60 font-bold text-sm">
+                        <option class="bg-dark-bg">Dhaka, BD</option>
+                        <option class="bg-dark-bg">Chittagong</option>
+                    </select>
+                </div>
+                <button class="px-10 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-black hover:opacity-90 active:scale-95 transition-all">
+                    Search
+                </button>
             </div>
         </section>
 
-        <!-- Category Grid -->
-        <section class="py-20 bg-slate-50 px-4">
-            <div class="max-w-6xl mx-auto">
-                <div class="flex justify-between items-end mb-12">
-                    <div>
-                        <h2 class="text-3xl font-bold">Explore Categories</h2>
-                        <p class="text-slate-500 mt-2">Vetted experts ready to help.</p>
-                    </div>
-                    <a href="#" class="text-primary font-bold hover:underline flex items-center gap-1">
-                        View all <span class="material-symbols-outlined text-sm">chevron_right</span>
-                    </a>
+        <!-- Category Grid (Frosted Glass Style) -->
+        <section class="max-w-7xl mx-auto py-20">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-4xl font-bold mb-4">Popular Categories</h2>
+                    <p class="text-white/40">Explore specialized experts for every requirement.</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-8 rounded-3xl border border-slate-100 hover:border-primary transition-all cursor-pointer group shadow-sm">
-                        <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-all">
-                            <span class="material-symbols-outlined">electric_bolt</span>
-                        </div>
-                        <h3 class="font-bold text-lg mb-2">Electrician</h3>
-                        <p class="text-slate-500 text-sm">Wiring, lighting, and smart home setup.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl border border-slate-100 hover:border-primary transition-all cursor-pointer group shadow-sm">
-                        <div class="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-600 group-hover:text-white transition-all">
-                            <span class="material-symbols-outlined">plumbing</span>
-                        </div>
-                        <h3 class="font-bold text-lg mb-2">Plumber</h3>
-                        <p class="text-slate-500 text-sm">Leak repairs and drain cleaning.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl border border-slate-100 hover:border-primary transition-all cursor-pointer group shadow-sm">
-                        <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-600 group-hover:text-white transition-all">
-                            <span class="material-symbols-outlined">ac_unit</span>
-                        </div>
-                        <h3 class="font-bold text-lg mb-2">AC Technician</h3>
-                        <p class="text-slate-500 text-sm">HVAC maintenance and rapid repair.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl border border-slate-100 hover:border-primary transition-all cursor-pointer group shadow-sm">
-                        <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all">
-                            <span class="material-symbols-outlined">cleaning_services</span>
-                        </div>
-                        <h3 class="font-bold text-lg mb-2">Cleaning</h3>
-                        <p class="text-slate-500 text-sm">Deep residential cleaning and disinfection.</p>
-                    </div>
-                </div>
+                <a href="#" class="text-primary font-bold hover:underline">View All Services</a>
             </div>
-        </section>
 
-        <!-- CTA Split Section -->
-        <section class="py-20 px-4">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-slate-900 text-white p-12 rounded-[2.5rem] relative overflow-hidden group">
-                    <div class="relative z-10">
-                        <h2 class="text-3xl font-bold mb-4">Join as a Seller</h2>
-                        <p class="text-slate-400 mb-8 max-w-xs">Grow your business and manage bookings through Fixmate.</p>
-                        <a href="signup.html" class="px-8 py-3 bg-primary text-white rounded-xl font-bold hover:scale-105 transition-all inline-block">Become a Seller</a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/5 transition-all cursor-pointer">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary transition-all">
+                        <span class="material-symbols-outlined text-3xl">electric_bolt</span>
                     </div>
-                    <span class="material-symbols-outlined text-[200px] absolute -right-10 -bottom-10 opacity-5 group-hover:rotate-12 transition-transform">work</span>
+                    <h3 class="text-xl font-bold mb-3">Electrical</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Smart home wiring and expert panel upgrades.</p>
                 </div>
-                <div class="bg-primary p-12 rounded-[2.5rem] text-white relative overflow-hidden group">
-                    <div class="relative z-10">
-                        <h2 class="text-3xl font-bold mb-4">Need Help?</h2>
-                        <p class="text-primary-container text-blue-100 mb-8 max-w-xs">Find the most reliable professionals for your home projects.</p>
-                        <a href="signup.html" class="px-8 py-3 bg-white text-primary rounded-xl font-bold hover:scale-105 transition-all inline-block">Find a Pro</a>
+                <!-- Card 2 -->
+                <div class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/5 transition-all cursor-pointer">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-accent transition-all">
+                        <span class="material-symbols-outlined text-3xl">plumbing</span>
                     </div>
-                    <span class="material-symbols-outlined text-[200px] absolute -right-10 -bottom-10 opacity-10 group-hover:rotate-12 transition-transform">home_repair_service</span>
+                    <h3 class="text-xl font-bold mb-3">Plumbing</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Drain cleaning and emergency pipe repairs.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/5 transition-all cursor-pointer">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-purple-600 transition-all">
+                        <span class="material-symbols-outlined text-3xl">ac_unit</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">HVAC Care</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Modern AC servicing and deep filter cleaning.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-card p-10 rounded-[2.5rem] group hover:bg-white/5 transition-all cursor-pointer">
+                    <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-green-600 transition-all">
+                        <span class="material-symbols-outlined text-3xl">cleaning_services</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cleaning</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Deep residential and premium office sanitation.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="py-12 border-t border-slate-100 px-4">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-                <p class="text-2xl font-black text-slate-900">Fixmate</p>
-                <p class="text-slate-500 text-sm mt-1">© 2024 Fixmate Marketplace. All rights reserved.</p>
-            </div>
-            <div class="flex gap-8 text-sm font-bold text-slate-500">
-                <a href="#" class="hover:text-primary">Privacy Policy</a>
-                <a href="#" class="hover:text-primary">Terms of Service</a>
-                <a href="#" class="hover:text-primary">Contact</a>
+    <footer class="mt-24 py-20 border-t border-glass-border">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-5xl font-black mb-6">Build Your Business.</h2>
+            <p class="text-white/40 mb-12">Start your journey with Fixmate today. Join for free.</p>
+            <a href="signup.html" class="px-12 py-4 bg-white text-dark-bg rounded-full font-black hover:bg-primary hover:text-white transition-all">Join Fixmate Free</a>
+
+            <div class="mt-20 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-glass-border pt-12">
+                <p class="text-white/20 text-sm">© 2024 Fixmate Marketplace. Built for the modern web.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="nav-link text-xs uppercase font-bold tracking-widest">Privacy</a>
+                    <a href="#" class="nav-link text-xs uppercase font-bold tracking-widest">Terms</a>
+                    <a href="#" class="nav-link text-xs uppercase font-bold tracking-widest">Twitter</a>
+                </div>
             </div>
         </div>
     </footer>
