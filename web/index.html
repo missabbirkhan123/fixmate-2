@@ -59,6 +59,8 @@
             z-index: 100;
         }
         .custom-dropdown:hover .dropdown-menu { display: block; }
+        select optgroup { background: #0b0e14; color: #ff1f71; font-weight: bold; }
+        select option { background: #0b0e14; color: #ffffff; font-weight: normal; }
     </style>
 </head>
 <body class="antialiased">
@@ -85,10 +87,10 @@
         <!-- Hero Section -->
         <section class="max-w-5xl mx-auto pt-16 pb-12 text-center">
             <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tight">
-                Hire Verified <span class="text-gradient">Experts.</span>
+                Verified Experts in <span class="text-gradient">Your Area.</span>
             </h1>
 
-            <!-- Advanced Search Bar with Dropdown -->
+            <!-- Advanced Search Bar -->
             <div class="max-w-5xl mx-auto glass-card p-2 rounded-2xl flex flex-col lg:flex-row gap-2 shadow-2xl">
                 <!-- 1. Search Text -->
                 <div class="flex-[2] flex items-center gap-3 px-6 py-4 rounded-xl focus-within:bg-white/5 transition-all">
@@ -96,7 +98,7 @@
                     <input type="text" id="mainSearch" onkeyup="filterPosts()" placeholder="Search anything..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder:text-white/20 font-medium">
                 </div>
 
-                <!-- 2. Category Dropdown (Left of Search Button) -->
+                <!-- 2. Category Dropdown -->
                 <div class="custom-dropdown flex-1 px-6 py-4 rounded-xl border-l border-glass-border cursor-pointer hover:bg-white/5 transition-all">
                     <div class="flex items-center justify-between text-white/60">
                         <div class="flex items-center gap-2">
@@ -105,25 +107,59 @@
                         </div>
                         <span class="material-symbols-outlined">expand_more</span>
                     </div>
-                    <!-- Dropdown List -->
-                    <div id="categoryDropdown" class="dropdown-menu glass-card rounded-2xl p-2 shadow-2xl">
-                        <!-- Categories injected by JS -->
-                    </div>
+                    <div id="categoryDropdown" class="dropdown-menu glass-card rounded-2xl p-2 shadow-2xl"></div>
                 </div>
 
-                <!-- 3. Location Select -->
+                <!-- 3. Advanced Location Select (Exhaustive 64 Districts) -->
                 <div class="flex-1 flex items-center gap-3 px-6 py-4 rounded-xl border-l border-glass-border">
                     <span class="material-symbols-outlined text-white/30">location_on</span>
-                    <select id="locationSelect" onchange="filterPosts()" class="w-full bg-transparent border-none focus:ring-0 text-white/60 font-bold text-sm appearance-none">
-                        <option value="" class="bg-dark-bg">All BD</option>
-                        <option value="Dhaka" class="bg-dark-bg">Dhaka</option>
-                        <option value="Chittagong" class="bg-dark-bg">Chittagong</option>
-                        <option value="Sylhet" class="bg-dark-bg">Sylhet</option>
+                    <select id="locationSelect" onchange="filterPosts()" class="w-full bg-transparent border-none focus:ring-0 text-white/60 font-bold text-sm appearance-none cursor-pointer">
+                        <option value="">All BD</option>
+                        <optgroup label="Dhaka Division">
+                            <option value="Dhaka">Dhaka</option><option value="Faridpur">Faridpur</option><option value="Gazipur">Gazipur</option>
+                            <option value="Gopalganj">Gopalganj</option><option value="Kishoreganj">Kishoreganj</option><option value="Madaripur">Madaripur</option>
+                            <option value="Manikganj">Manikganj</option><option value="Munshiganj">Munshiganj</option><option value="Narayanganj">Narayanganj</option>
+                            <option value="Narsingdi">Narsingdi</option><option value="Rajbari">Rajbari</option><option value="Shariatpur">Shariatpur</option>
+                            <option value="Tangail">Tangail</option>
+                        </optgroup>
+                        <optgroup label="Chattogram Division">
+                            <option value="Chattogram">Chattogram</option><option value="Bandarban">Bandarban</option><option value="Brahmanbaria">Brahmanbaria</option>
+                            <option value="Chandpur">Chandpur</option><option value="Cumilla">Cumilla</option><option value="Cox's Bazar">Cox's Bazar</option>
+                            <option value="Feni">Feni</option><option value="Khagrachari">Khagrachari</option><option value="Lakshmipur">Lakshmipur</option>
+                            <option value="Noakhali">Noakhali</option><option value="Rangamati">Rangamati</option>
+                        </optgroup>
+                        <optgroup label="Rajshahi Division">
+                            <option value="Rajshahi">Rajshahi</option><option value="Bogura">Bogura</option><option value="Joypurhat">Joypurhat</option>
+                            <option value="Naogaon">Naogaon</option><option value="Natore">Natore</option><option value="Chapainawabganj">Chapainawabganj</option>
+                            <option value="Pabna">Pabna</option><option value="Sirajganj">Sirajganj</option>
+                        </optgroup>
+                        <optgroup label="Khulna Division">
+                            <option value="Khulna">Khulna</option><option value="Bagerhat">Bagerhat</option><option value="Chuadanga">Chuadanga</option>
+                            <option value="Jashore">Jashore</option><option value="Jhenaidah">Jhenaidah</option><option value="Kushtia">Kushtia</option>
+                            <option value="Magura">Magura</option><option value="Meherpur">Meherpur</option><option value="Narail">Narail</option>
+                            <option value="Satkhira">Satkhira</option>
+                        </optgroup>
+                        <optgroup label="Barishal Division">
+                            <option value="Barishal">Barishal</option><option value="Barguna">Barguna</option><option value="Bhola">Bhola</option>
+                            <option value="Jhalokati">Jhalokati</option><option value="Patuakhali">Patuakhali</option><option value="Pirojpur">Pirojpur</option>
+                        </optgroup>
+                        <optgroup label="Sylhet Division">
+                            <option value="Sylhet">Sylhet</option><option value="Habiganj">Habiganj</option><option value="Moulvibazar">Moulvibazar</option>
+                            <option value="Sunamganj">Sunamganj</option>
+                        </optgroup>
+                        <optgroup label="Rangpur Division">
+                            <option value="Rangpur">Rangpur</option><option value="Dinajpur">Dinajpur</option><option value="Gaibandha">Gaibandha</option>
+                            <option value="Kurigram">Kurigram</option><option value="Lalmonirhat">Lalmonirhat</option><option value="Nilphamari">Nilphamari</option>
+                            <option value="Panchagarh">Panchagarh</option><option value="Thakurgaon">Thakurgaon</option>
+                        </optgroup>
+                        <optgroup label="Mymensingh Division">
+                            <option value="Mymensingh">Mymensingh</option><option value="Jamalpur">Jamalpur</option><option value="Netrokona">Netrokona</option>
+                            <option value="Sherpur">Sherpur</option>
+                        </optgroup>
                     </select>
                 </div>
 
-                <!-- 4. Search Button -->
-                <button class="px-10 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-black hover:opacity-90 active:scale-95 transition-all">
+                <button onclick="filterPosts()" class="px-10 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-black hover:opacity-90 active:scale-95 transition-all">
                     Search
                 </button>
             </div>
@@ -139,15 +175,12 @@
                     Jobs Posted
                 </button>
             </div>
-
-            <div id="postGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Posts will be injected here -->
-            </div>
+            <div id="postGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
         </section>
     </main>
 
     <footer class="mt-20 py-10 border-t border-glass-border text-center">
-        <p class="text-white/20 text-sm">© 2024 Fixmate Service Directory. Nested Categories Integrated.</p>
+        <p class="text-white/20 text-sm">© 2024 Fixmate BD. Full 64 District Coverage Integrated.</p>
     </footer>
 
     <script>
@@ -164,19 +197,28 @@
             "Kitchen": ["Gas Stove", "Water Purifier", "Oven Repair"]
         };
 
+        const allDistricts = [
+            "Dhaka", "Faridpur", "Gazipur", "Gopalganj", "Kishoreganj", "Madaripur", "Manikganj", "Munshiganj", "Narayanganj", "Narsingdi", "Rajbari", "Shariatpur", "Tangail",
+            "Chattogram", "Bandarban", "Brahmanbaria", "Chandpur", "Cumilla", "Cox's Bazar", "Feni", "Khagrachari", "Lakshmipur", "Noakhali", "Rangamati",
+            "Rajshahi", "Bogura", "Joypurhat", "Naogaon", "Natore", "Chapainawabganj", "Pabna", "Sirajganj",
+            "Khulna", "Bagerhat", "Chuadanga", "Jashore", "Jhenaidah", "Kushtia", "Magura", "Meherpur", "Narail", "Satkhira",
+            "Barishal", "Barguna", "Bhola", "Jhalokati", "Patuakhali", "Pirojpur",
+            "Sylhet", "Habiganj", "Moulvibazar", "Sunamganj",
+            "Rangpur", "Dinajpur", "Gaibandha", "Kurigram", "Lalmonirhat", "Nilphamari", "Panchagarh", "Thakurgaon",
+            "Mymensingh", "Jamalpur", "Netrokona", "Sherpur"
+        ];
+
         let currentTab = 'seller';
         let selectedCategory = null;
         const sellerPosts = [];
         const buyerPosts = [];
 
-        // Generate 200 Demo Posts
+        // Generate 200 Demo Posts using all 64 districts
         const catKeys = Object.keys(categories);
-        const locations = ["Dhaka", "Chittagong", "Sylhet"];
-
         for (let i = 1; i <= 200; i++) {
             const mainCat = catKeys[Math.floor(Math.random() * catKeys.length)];
             const subCat = categories[mainCat][Math.floor(Math.random() * categories[mainCat].length)];
-            const loc = locations[Math.floor(Math.random() * locations.length)];
+            const loc = allDistricts[Math.floor(Math.random() * allDistricts.length)];
 
             if (i <= 100) {
                 sellerPosts.push({
@@ -196,23 +238,14 @@
         function initDropdown() {
             const container = document.getElementById('categoryDropdown');
             let html = `<div onclick="selectCategory('All Categories', null)" class="px-4 py-2 hover:bg-white/10 rounded-lg text-sm font-bold text-primary">Clear Filter</div>`;
-
             catKeys.forEach(cat => {
                 html += `
                     <div class="group/item relative">
-                        <div class="px-4 py-3 hover:bg-white/10 rounded-lg text-sm font-bold flex justify-between items-center">
-                            ${cat} <span class="material-symbols-outlined text-xs">chevron_right</span>
-                        </div>
-                        <!-- Sub Categories on Hover -->
+                        <div class="px-4 py-3 hover:bg-white/10 rounded-lg text-sm font-bold flex justify-between items-center">${cat} <span class="material-symbols-outlined text-xs">chevron_right</span></div>
                         <div class="hidden group-hover/item:block absolute left-full top-0 ml-1 w-64 glass-card rounded-2xl p-2 shadow-2xl">
-                            ${categories[cat].map(sub => `
-                                <div onclick="selectCategory('${sub}', '${cat}')" class="px-4 py-2 hover:bg-primary/20 rounded-lg text-xs font-medium">
-                                    ${sub}
-                                </div>
-                            `).join('')}
+                            ${categories[cat].map(sub => `<div onclick="selectCategory('${sub}', '${cat}')" class="px-4 py-2 hover:bg-primary/20 rounded-lg text-xs font-medium">${sub}</div>`).join('')}
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
             container.innerHTML = html;
         }
@@ -240,16 +273,10 @@
                             <span class="material-symbols-outlined text-sm">location_on</span> ${post.location}
                         </div>
                         <div class="pt-4 border-t border-glass-border flex justify-between items-center">
-                            <div>
-                                <p class="text-[10px] text-white/30 uppercase font-bold">${post.type === 'seller' ? 'Starts at' : 'Budget'}</p>
-                                <p class="font-black text-white">${post.type === 'seller' ? post.price : post.budget}</p>
-                            </div>
-                            <button class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all">
-                                <span class="material-symbols-outlined text-white">chevron_right</span>
-                            </button>
+                            <div><p class="text-[10px] text-white/30 uppercase font-bold">${post.type === 'seller' ? 'Starts at' : 'Budget'}</p><p class="font-black text-white">${post.type === 'seller' ? post.price : post.budget}</p></div>
+                            <button class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all"><span class="material-symbols-outlined text-white">chevron_right</span></button>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
         }
 
