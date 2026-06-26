@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun TopNavBar(
     onSignInClick: () -> Unit = {},
-    onGetStartedClick: () -> Unit = {},
+    onSignUpClick: () -> Unit = {},
     onLogoClick: () -> Unit = {},
     logoText: String = "ProMarket"
 ) {
@@ -50,23 +50,19 @@ fun TopNavBar(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Desktop/Tablet layout simulation
                 TextButton(onClick = onSignInClick) {
-                    Text("Sign In", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Log In", color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
                 }
                 
                 Button(
-                    onClick = onGetStartedClick,
-                    shape = RoundedCornerShape(8.dp),
+                    onClick = onSignUpClick,
+                    shape = RoundedCornerShape(24.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                 ) {
-                    Text("Get Started")
+                    Text("Sign Up")
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
-                
-                Icon(Icons.Outlined.Notifications, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
-                Icon(Icons.Outlined.Mail, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 
                 Box(
                     modifier = Modifier
