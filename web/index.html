@@ -45,9 +45,20 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0b0e14; }
         ::-webkit-scrollbar-thumb { background: #ff1f71; border-radius: 10px; }
-        .category-chip { transition: all 0.3s; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .category-chip:hover { border-color: #ff1f71; background: rgba(255, 31, 113, 0.1); }
-        .category-active { background: #ff1f71 !important; border-color: #ff1f71 !important; color: white !important; }
+
+        /* Dropdown Styles */
+        .custom-dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            width: 280px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        .custom-dropdown:hover .dropdown-menu { display: block; }
     </style>
 </head>
 <body class="antialiased">
@@ -74,34 +85,52 @@
         <!-- Hero Section -->
         <section class="max-w-5xl mx-auto pt-16 pb-12 text-center">
             <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tight">
-                Marketplace for <span class="text-gradient">Repairs.</span>
+                Hire Verified <span class="text-gradient">Experts.</span>
             </h1>
 
-            <!-- Search Bar -->
-            <div class="max-w-4xl mx-auto glass-card p-2 rounded-2xl flex flex-col md:flex-row gap-2 shadow-2xl">
-                <div class="flex-1 flex items-center gap-3 px-6 py-4 rounded-xl focus-within:bg-white/5 transition-all">
+            <!-- Advanced Search Bar with Dropdown -->
+            <div class="max-w-5xl mx-auto glass-card p-2 rounded-2xl flex flex-col lg:flex-row gap-2 shadow-2xl">
+                <!-- 1. Search Text -->
+                <div class="flex-[2] flex items-center gap-3 px-6 py-4 rounded-xl focus-within:bg-white/5 transition-all">
                     <span class="material-symbols-outlined text-white/30">search</span>
-                    <input type="text" id="mainSearch" onkeyup="filterPosts()" placeholder="Search services, parts, or jobs..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder:text-white/20 font-medium">
+                    <input type="text" id="mainSearch" onkeyup="filterPosts()" placeholder="Search anything..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder:text-white/20 font-medium">
                 </div>
+
+                <!-- 2. Category Dropdown (Left of Search Button) -->
+                <div class="custom-dropdown flex-1 px-6 py-4 rounded-xl border-l border-glass-border cursor-pointer hover:bg-white/5 transition-all">
+                    <div class="flex items-center justify-between text-white/60">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">category</span>
+                            <span id="selectedCatLabel" class="text-sm font-bold whitespace-nowrap">All Categories</span>
+                        </div>
+                        <span class="material-symbols-outlined">expand_more</span>
+                    </div>
+                    <!-- Dropdown List -->
+                    <div id="categoryDropdown" class="dropdown-menu glass-card rounded-2xl p-2 shadow-2xl">
+                        <!-- Categories injected by JS -->
+                    </div>
+                </div>
+
+                <!-- 3. Location Select -->
+                <div class="flex-1 flex items-center gap-3 px-6 py-4 rounded-xl border-l border-glass-border">
+                    <span class="material-symbols-outlined text-white/30">location_on</span>
+                    <select id="locationSelect" onchange="filterPosts()" class="w-full bg-transparent border-none focus:ring-0 text-white/60 font-bold text-sm appearance-none">
+                        <option value="" class="bg-dark-bg">All BD</option>
+                        <option value="Dhaka" class="bg-dark-bg">Dhaka</option>
+                        <option value="Chittagong" class="bg-dark-bg">Chittagong</option>
+                        <option value="Sylhet" class="bg-dark-bg">Sylhet</option>
+                    </select>
+                </div>
+
+                <!-- 4. Search Button -->
                 <button class="px-10 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-black hover:opacity-90 active:scale-95 transition-all">
                     Search
                 </button>
             </div>
         </section>
 
-        <!-- Category Horizontal Browser -->
-        <section class="max-w-7xl mx-auto mb-10">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-sm font-black uppercase tracking-widest text-white/40">Select Category</h3>
-                <button onclick="resetCategory()" class="text-xs font-bold text-primary hover:underline">Clear Filter</button>
-            </div>
-            <div id="categoryContainer" class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
-                <!-- Categories will be injected here -->
-            </div>
-        </section>
-
         <!-- Marketplace Feed -->
-        <section class="max-w-7xl mx-auto py-4">
+        <section class="max-w-7xl mx-auto py-10">
             <div class="flex justify-center gap-4 mb-12">
                 <button onclick="switchTab('seller')" id="tabSeller" class="px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary">
                     Services Available
@@ -118,39 +147,21 @@
     </main>
 
     <footer class="mt-20 py-10 border-t border-glass-border text-center">
-        <p class="text-white/20 text-sm">© 2024 Fixmate Service Directory. 200+ Dynamic Categories Integrated.</p>
+        <p class="text-white/20 text-sm">© 2024 Fixmate Service Directory. Nested Categories Integrated.</p>
     </footer>
 
     <script>
-        // FULL CATEGORY DATA
         const categories = {
-            "Mobile Phone": ["Screen Replacement", "Battery Replacement", "Charging Port", "Motherboard Repair", "Data Recovery"],
-            "Laptop & Computer": ["Keyboard Replacement", "RAM Upgrade", "SSD Upgrade", "OS Installation", "Virus Removal"],
-            "Printer": ["Head Cleaning", "Paper Jam", "Ink System", "Connectivity Repair"],
-            "Home Appliance": ["Refrigerator", "Washing Machine", "Microwave", "Air Conditioner", "Electric Fan"],
-            "Television": ["LED Panel", "Backlight Repair", "Main Board Repair"],
+            "Mobile Phone": ["Screen Replacement", "Battery Replacement", "Charging Port", "Motherboard Repair"],
+            "Laptop & Computer": ["Keyboard", "RAM Upgrade", "SSD Upgrade", "OS Installation"],
+            "Home Appliance": ["Refrigerator", "Washing Machine", "Microwave", "AC Repair"],
             "Smart Device": ["Smart Watch", "Tablet", "Security Camera"],
-            "Electrical": ["Switch Repair", "Wiring", "Circuit Breaker", "Ceiling Light"],
-            "Plumbing": ["Pipe Leak", "Water Pump", "Toilet Flush", "Water Heater"],
-            "Furniture": ["Chair Repair", "Sofa Repair", "Lock Repair", "Glass Replacement"],
-            "Bicycle": ["Tire Repair", "Brake Repair", "Gear Adjustment"],
-            "Motorcycle": ["Engine Repair", "Tire Replacement", "Oil Leak Repair"],
-            "Car": ["Engine Repair", "Transmission", "AC Repair", "ECU Repair"],
-            "Generator": ["Engine Repair", "Alternator", "Fuel System"],
-            "Solar System": ["Panel Cleaning", "Inverter Repair", "Battery Replacement"],
-            "CCTV": ["Camera Repair", "DVR/NVR Repair", "Cable Repair"],
-            "Door & Lock": ["Lock Replacement", "Smart Lock", "Hinge Repair"],
-            "Kitchen": ["Gas Stove", "Water Purifier", "Oven Repair"],
-            "Power Tool": ["Drill Machine", "Grinder", "Air Compressor"]
-        };
-
-        const categoryIcons = {
-            "Mobile Phone": "smartphone", "Laptop & Computer": "laptop_mac", "Printer": "print",
-            "Home Appliance": "refrigerator", "Television": "tv", "Smart Device": "watch",
-            "Electrical": "bolt", "Plumbing": "plumbing", "Furniture": "chair",
-            "Bicycle": "pedal_bike", "Motorcycle": "motorcycle", "Car": "directions_car",
-            "Generator": "generator", "Solar System": "solar_power", "CCTV": "videocam",
-            "Door & Lock": "lock", "Kitchen": "cooking", "Power Tool": "build"
+            "Electrical": ["Switch Repair", "Wiring", "Ceiling Light"],
+            "Plumbing": ["Pipe Leak", "Water Pump", "Toilet Flush"],
+            "Furniture": ["Chair Repair", "Sofa Repair", "Lock Repair"],
+            "Bicycle/Car": ["Tire Repair", "Engine Repair", "Brake System"],
+            "CCTV/Security": ["Camera Repair", "DVR Repair", "Cable Repair"],
+            "Kitchen": ["Gas Stove", "Water Purifier", "Oven Repair"]
         };
 
         let currentTab = 'seller';
@@ -158,9 +169,9 @@
         const sellerPosts = [];
         const buyerPosts = [];
 
-        // Generate 200 Demo Posts using the new Categories
+        // Generate 200 Demo Posts
         const catKeys = Object.keys(categories);
-        const locations = ["Dhaka", "Chittagong", "Sylhet", "Rajshahi", "Khulna"];
+        const locations = ["Dhaka", "Chittagong", "Sylhet"];
 
         for (let i = 1; i <= 200; i++) {
             const mainCat = catKeys[Math.floor(Math.random() * catKeys.length)];
@@ -169,42 +180,46 @@
 
             if (i <= 100) {
                 sellerPosts.push({
-                    id: i, type: 'seller', title: `Expert ${subCat} Service - Pro #${i}`,
+                    id: i, type: 'seller', title: `Pro ${subCat} Service`,
                     mainCat: mainCat, category: subCat, location: loc,
-                    price: `${(Math.random() * 5000 + 500).toFixed(0)} BDT`, rating: (Math.random() * 1.5 + 3.5).toFixed(1)
+                    price: `${(Math.random() * 5000 + 500).toFixed(0)} BDT`, rating: (Math.random() * 1 + 4).toFixed(1)
                 });
             } else {
                 buyerPosts.push({
-                    id: i, type: 'buyer', title: `Need ${subCat} urgently at ${loc}`,
+                    id: i, type: 'buyer', title: `Need ${subCat} Expert`,
                     mainCat: mainCat, category: subCat, location: loc,
-                    budget: `${(Math.random() * 3000 + 200).toFixed(0)} BDT`, posted: `${i-100}h ago`
+                    budget: `${(Math.random() * 3000 + 200).toFixed(0)} BDT`
                 });
             }
         }
 
-        function initCategories() {
-            const container = document.getElementById('categoryContainer');
+        function initDropdown() {
+            const container = document.getElementById('categoryDropdown');
+            let html = `<div onclick="selectCategory('All Categories', null)" class="px-4 py-2 hover:bg-white/10 rounded-lg text-sm font-bold text-primary">Clear Filter</div>`;
+
             catKeys.forEach(cat => {
-                const icon = categoryIcons[cat] || 'settings';
-                container.innerHTML += `
-                    <div onclick="selectCategory(this, '${cat}')" class="category-chip flex-shrink-0 px-5 py-3 rounded-2xl glass-card flex items-center gap-3">
-                        <span class="material-symbols-outlined text-lg">${icon}</span>
-                        <span class="text-sm font-bold whitespace-nowrap">${cat}</span>
+                html += `
+                    <div class="group/item relative">
+                        <div class="px-4 py-3 hover:bg-white/10 rounded-lg text-sm font-bold flex justify-between items-center">
+                            ${cat} <span class="material-symbols-outlined text-xs">chevron_right</span>
+                        </div>
+                        <!-- Sub Categories on Hover -->
+                        <div class="hidden group-hover/item:block absolute left-full top-0 ml-1 w-64 glass-card rounded-2xl p-2 shadow-2xl">
+                            ${categories[cat].map(sub => `
+                                <div onclick="selectCategory('${sub}', '${cat}')" class="px-4 py-2 hover:bg-primary/20 rounded-lg text-xs font-medium">
+                                    ${sub}
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 `;
             });
+            container.innerHTML = html;
         }
 
-        function selectCategory(el, cat) {
-            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('category-active'));
-            el.classList.add('category-active');
-            selectedCategory = cat;
-            filterPosts();
-        }
-
-        function resetCategory() {
-            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('category-active'));
-            selectedCategory = null;
+        function selectCategory(label, mainCat) {
+            selectedCategory = mainCat;
+            document.getElementById('selectedCatLabel').innerText = label;
             filterPosts();
         }
 
@@ -212,22 +227,22 @@
             const grid = document.getElementById('postGrid');
             grid.innerHTML = '';
             posts.forEach(post => {
-                const isSeller = post.type === 'seller';
                 grid.innerHTML += `
                     <div class="glass-card p-6 rounded-3xl hover:bg-white/5 transition-all cursor-pointer group border border-glass-border">
                         <div class="flex justify-between items-start mb-4">
                             <span class="text-[10px] px-2 py-1 rounded-md bg-white/10 font-bold uppercase tracking-widest text-white/50">${post.category}</span>
-                            ${isSeller ? `<span class="flex items-center gap-1 text-accent font-bold text-xs"><span class="material-symbols-outlined text-xs fill-1">star</span>${post.rating}</span>` : `<span class="text-primary font-bold text-[10px] uppercase">Job Post</span>`}
+                            <span class="flex items-center gap-1 text-accent font-bold text-xs">
+                                ${post.type === 'seller' ? `<span class="material-symbols-outlined text-xs fill-1">star</span>${post.rating}` : 'JOB'}
+                            </span>
                         </div>
                         <h3 class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">${post.title}</h3>
                         <div class="flex items-center gap-2 text-white/40 text-xs mb-4">
-                            <span class="material-symbols-outlined text-sm">location_on</span>
-                            ${post.location}
+                            <span class="material-symbols-outlined text-sm">location_on</span> ${post.location}
                         </div>
                         <div class="pt-4 border-t border-glass-border flex justify-between items-center">
                             <div>
-                                <p class="text-[10px] text-white/30 uppercase font-bold">${isSeller ? 'Starts at' : 'Budget'}</p>
-                                <p class="font-black text-white">${isSeller ? post.price : post.budget}</p>
+                                <p class="text-[10px] text-white/30 uppercase font-bold">${post.type === 'seller' ? 'Starts at' : 'Budget'}</p>
+                                <p class="font-black text-white">${post.type === 'seller' ? post.price : post.budget}</p>
                             </div>
                             <button class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all">
                                 <span class="material-symbols-outlined text-white">chevron_right</span>
@@ -240,31 +255,25 @@
 
         function switchTab(tab) {
             currentTab = tab;
-            const btnSeller = document.getElementById('tabSeller');
-            const btnBuyer = document.getElementById('tabBuyer');
-
-            if (tab === 'seller') {
-                btnSeller.className = "px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary";
-                btnBuyer.className = "px-8 py-3 rounded-full font-bold transition-all bg-white/5 text-white/60 border border-glass-border";
-            } else {
-                btnBuyer.className = "px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary";
-                btnSeller.className = "px-8 py-3 rounded-full font-bold transition-all bg-white/5 text-white/60 border border-glass-border";
-            }
+            document.getElementById('tabSeller').className = tab === 'seller' ? "px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary" : "px-8 py-3 rounded-full font-bold transition-all bg-white/5 text-white/60 border border-glass-border";
+            document.getElementById('tabBuyer').className = tab === 'buyer' ? "px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary" : "px-8 py-3 rounded-full font-bold transition-all bg-white/5 text-white/60 border border-glass-border";
             filterPosts();
         }
 
         function filterPosts() {
             const query = document.getElementById('mainSearch').value.toLowerCase();
+            const loc = document.getElementById('locationSelect').value;
             const data = currentTab === 'seller' ? sellerPosts : buyerPosts;
             const filtered = data.filter(p => {
                 const matchesSearch = p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
                 const matchesCat = selectedCategory ? p.mainCat === selectedCategory : true;
-                return matchesSearch && matchesCat;
+                const matchesLoc = loc ? p.location === loc : true;
+                return matchesSearch && matchesCat && matchesLoc;
             });
             renderPosts(filtered);
         }
 
-        initCategories();
+        initDropdown();
         renderPosts(sellerPosts);
     </script>
 </body>
