@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Fixmate | Advanced Admin Analytics</title>
+    <title>Fixmate | Premium Admin Control</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -28,282 +28,327 @@
     </script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b0e14; color: #ffffff; overflow: hidden; }
-        .sidebar-link { transition: all 0.3s; color: rgba(255, 255, 255, 0.5); font-weight: 600; font-size: 0.875rem; }
+        .sidebar-link { transition: all 0.3s; color: rgba(255, 255, 255, 0.5); font-weight: 600; font-size: 0.875rem; cursor: pointer; }
         .sidebar-link:hover, .sidebar-link.active { color: #ff1f71; background: rgba(255, 31, 113, 0.05); }
-        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); }
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .content-section { display: none; }
+        .content-section { display: none; height: 100%; }
         .content-section.active { display: block; }
-        .chart-container { position: relative; height: 320px; width: 100%; }
-        .stats-gradient { background: linear-gradient(135deg, rgba(255, 31, 113, 0.1) 0%, transparent 100%); }
+        .chart-container { position: relative; height: 300px; width: 100%; }
     </style>
 </head>
 <body class="antialiased flex h-screen">
 
     <!-- Sidebar Navigation -->
-    <aside class="w-72 border-r border-glass-border flex flex-col bg-dark-bg/50 backdrop-blur-2xl">
+    <aside class="w-72 border-r border-glass-border flex flex-col bg-dark-bg/50 backdrop-blur-2xl shrink-0">
         <div class="p-8 border-b border-glass-border">
             <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
                 <div class="w-8 h-8 bg-gradient-to-tr from-primary to-accent rounded-lg"></div>
-                Fixmate <span class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full uppercase ml-1">Admin</span>
+                Fixmate <span class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full uppercase ml-1 font-black">Admin</span>
             </a>
         </div>
 
         <nav class="flex-1 overflow-y-auto p-4 space-y-1">
             <p class="px-4 py-2 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">Platform Control</p>
-            <a href="#" onclick="showSection('dashboard')" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-xl">
-                <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard Overview
-            </a>
-            <a href="#" onclick="showSection('users')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl">
+            <div onclick="showSection('dashboard')" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-xl" id="link-dashboard">
+                <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+            </div>
+            <div onclick="showSection('users')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl" id="link-users">
                 <span class="material-symbols-outlined text-[20px]">group</span> User Management
-            </a>
-            <a href="#" onclick="showSection('orders')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl">
-                <span class="material-symbols-outlined text-[20px]">shopping_cart</span> Order Tracking
-            </a>
-            <a href="#" onclick="showSection('disputes')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl">
-                <span class="material-symbols-outlined text-[20px]">gavel</span> Disputes & Reports
-            </a>
+            </div>
+            <div onclick="showSection('orders')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl" id="link-orders">
+                <span class="material-symbols-outlined text-[20px]">shopping_cart</span> Active Orders
+            </div>
+            <div onclick="showSection('disputes')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl" id="link-disputes">
+                <span class="material-symbols-outlined text-[20px]">gavel</span> Disputes
+            </div>
 
             <p class="px-4 py-2 mt-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">Financials</p>
-            <a href="#" onclick="showSection('payments')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl">
-                <span class="material-symbols-outlined text-[20px]">payments</span> Payment Gateway
-            </a>
-            <a href="#" onclick="showSection('withdrawals')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl">
+            <div onclick="showSection('payments')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl" id="link-payments">
+                <span class="material-symbols-outlined text-[20px]">payments</span> Gateway
+            </div>
+            <div onclick="showSection('withdrawals')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl" id="link-withdrawals">
                 <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span> Withdrawals
-            </a>
+            </div>
 
-            <p class="px-4 py-2 mt-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">Settings</p>
-            <a href="#" onclick="showSection('settings')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl">
-                <span class="material-symbols-outlined text-[20px]">settings</span> Platform Settings
-            </a>
+            <p class="px-4 py-2 mt-6 text-[10px] font-black text-white/20 uppercase tracking-[0.2em]">Setup</p>
+            <div onclick="showSection('categories')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl" id="link-categories">
+                <span class="material-symbols-outlined text-[20px]">category</span> Categories
+            </div>
+            <div onclick="showSection('settings')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl" id="link-settings">
+                <span class="material-symbols-outlined text-[20px]">settings</span> Settings
+            </div>
         </nav>
 
         <div class="p-6 border-t border-glass-border">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary text-xs">AR</div>
-                <div>
-                    <p class="text-sm font-bold">Alex Rivera</p>
-                    <p class="text-[10px] text-white/30 font-bold uppercase">Super Admin</p>
-                </div>
-            </div>
-            <button class="w-full py-3 bg-white/5 border border-glass-border rounded-xl text-xs font-black hover:bg-red-500/10 hover:text-red-500 transition-all">Sign Out</button>
+            <button onclick="location.href='index.html'" class="w-full py-3 bg-white/5 border border-glass-border rounded-xl text-xs font-black hover:bg-red-500/10 hover:text-red-500 transition-all">Sign Out</button>
         </div>
     </aside>
 
-    <!-- Main Content Area -->
+    <!-- Main Content -->
     <main class="flex-1 flex flex-col overflow-hidden bg-[#0b0e14]">
-        <header class="h-20 border-b border-glass-border flex items-center justify-between px-8 bg-dark-bg/60 backdrop-blur-xl">
+        <!-- Header -->
+        <header class="h-20 border-b border-glass-border flex items-center justify-between px-8 bg-dark-bg/60 backdrop-blur-xl shrink-0">
             <div class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-white/20">analytics</span>
                 <h2 id="sectionTitle" class="text-lg font-black tracking-tight">Dashboard Overview</h2>
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 text-white/40">
                 <div class="h-10 px-4 glass-card rounded-xl flex items-center gap-2">
-                    <span class="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.8)]"></span>
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]"></span>
                     <span class="text-[10px] font-black text-white/60 uppercase tracking-widest">Real-time Feed</span>
                 </div>
             </div>
         </header>
 
+        <!-- Content Area -->
         <div class="flex-1 overflow-y-auto p-8 scroll-smooth">
 
-            <!-- 1. DASHBOARD OVERVIEW -->
+            <!-- 1. DASHBOARD -->
             <div id="dashboard" class="content-section active space-y-10">
-                <!-- Premium Stats Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="glass-card stats-gradient p-8 rounded-[2.5rem] relative overflow-hidden group hover:scale-[1.02] transition-all">
-                        <div class="relative z-10">
-                            <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-4">Total Revenue</p>
-                            <h3 class="text-4xl font-black text-white">৳845.2k</h3>
-                            <div class="flex items-center gap-2 mt-4">
-                                <span class="px-2 py-1 bg-green-500/20 text-green-500 text-[10px] font-black rounded-lg">+14.5%</span>
-                                <span class="text-[10px] text-white/20 font-bold uppercase">vs last month</span>
-                            </div>
-                        </div>
-                        <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] text-white/5 rotate-12 group-hover:scale-110 transition-transform">payments</span>
+                    <div class="glass-card p-8 rounded-[2.5rem] border-primary/20 bg-primary/5">
+                        <p class="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-4">Daily Revenue</p>
+                        <h3 class="text-4xl font-black">৳42.5k</h3>
                     </div>
-                    <div class="glass-card p-8 rounded-[2.5rem] relative overflow-hidden group hover:scale-[1.02] transition-all">
-                        <div class="relative z-10">
-                            <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-4">Active Sellers</p>
-                            <h3 class="text-4xl font-black text-white">1,842</h3>
-                            <p class="text-[10px] text-white/20 font-bold uppercase mt-4">98 New this week</p>
-                        </div>
-                        <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] text-white/5 rotate-12 group-hover:scale-110 transition-transform">storefront</span>
+                    <div class="glass-card p-8 rounded-[2.5rem]">
+                        <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-4">Total Users</p>
+                        <h3 class="text-4xl font-black text-white">24.5k</h3>
                     </div>
-                    <div class="glass-card p-8 rounded-[2.5rem] relative overflow-hidden group hover:scale-[1.02] transition-all">
-                        <div class="relative z-10">
-                            <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-4">Market Orders</p>
-                            <h3 class="text-4xl font-black text-accent">1,208</h3>
-                            <p class="text-[10px] text-white/20 font-bold uppercase mt-4">92% Completion Rate</p>
-                        </div>
-                        <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] text-white/5 rotate-12 group-hover:scale-110 transition-transform">shopping_bag</span>
+                    <div class="glass-card p-8 rounded-[2.5rem]">
+                        <p class="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-4">Active Orders</p>
+                        <h3 class="text-4xl font-black text-accent">1,208</h3>
                     </div>
-                    <div class="glass-card p-8 rounded-[2.5rem] border-primary/20 bg-primary/5 relative overflow-hidden group hover:scale-[1.02] transition-all">
-                        <div class="relative z-10">
-                            <p class="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-4">Approvals</p>
-                            <h3 class="text-4xl font-black text-white">128</h3>
-                            <p class="text-[10px] text-primary font-black uppercase mt-4 animate-pulse">Action Required</p>
-                        </div>
-                        <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[100px] text-primary/10 rotate-12 group-hover:scale-110 transition-transform">verified_user</span>
+                    <div class="glass-card p-8 rounded-[2.5rem] border-accent/20 bg-accent/5">
+                        <p class="text-[10px] font-black text-accent uppercase tracking-[0.2em] mb-4">Pending Payouts</p>
+                        <h3 class="text-4xl font-black">৳125k</h3>
                     </div>
                 </div>
 
-                <!-- High-End Charts Section -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2 glass-card p-10 rounded-[3rem] relative">
-                        <div class="flex justify-between items-center mb-10">
-                            <div>
-                                <h4 class="text-sm font-black uppercase tracking-[0.2em] text-white/60">Revenue Performance</h4>
-                                <p class="text-xs text-white/20 font-bold mt-1 uppercase">Monthly transactional volume across all categories</p>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="px-4 py-2 glass-card rounded-xl text-[10px] font-black uppercase tracking-widest text-primary">Daily</button>
-                                <button class="px-4 py-2 bg-white/5 rounded-xl text-[10px] font-black uppercase tracking-widest text-white/40">Monthly</button>
-                            </div>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="revenueChart"></canvas>
-                        </div>
+                    <div class="lg:col-span-2 glass-card p-8 rounded-[3rem]">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-white/20 mb-8">Revenue Performance</h4>
+                        <div class="chart-container"><canvas id="revChart"></canvas></div>
                     </div>
-
-                    <div class="glass-card p-10 rounded-[3rem] flex flex-col">
-                        <h4 class="text-sm font-black uppercase tracking-[0.2em] text-white/60 mb-10">Service Distribution</h4>
-                        <div class="flex-1 flex items-center justify-center relative">
-                            <canvas id="categoryChart"></canvas>
-                            <!-- Center Text for Doughnut -->
-                            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                <span class="text-2xl font-black">200+</span>
-                                <span class="text-[8px] font-black uppercase text-white/20 tracking-[0.2em]">Categories</span>
-                            </div>
-                        </div>
-                        <div class="mt-10 space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span><span class="text-xs font-bold text-white/60">Electronics</span></div>
-                                <span class="text-xs font-black">40%</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-accent"></span><span class="text-xs font-bold text-white/60">Home Repair</span></div>
-                                <span class="text-xs font-black">25%</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span><span class="text-xs font-bold text-white/60">Automotive</span></div>
-                                <span class="text-xs font-black">20%</span>
-                            </div>
-                        </div>
+                    <div class="glass-card p-8 rounded-[3rem]">
+                        <h4 class="text-xs font-black uppercase tracking-widest text-white/20 mb-8">Market Share</h4>
+                        <div class="chart-container"><canvas id="shareChart"></canvas></div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Recent Activity Table (Compact) -->
-                <div class="glass-card rounded-[2.5rem] overflow-hidden">
-                    <div class="px-10 py-8 border-b border-glass-border flex justify-between items-center">
-                        <h4 class="text-sm font-black uppercase tracking-[0.2em] text-white/60">Live Platform Activity</h4>
-                        <button class="text-[10px] font-black text-primary hover:underline uppercase tracking-widest">View All logs</button>
+            <!-- 2. USER MANAGEMENT -->
+            <div id="users" class="content-section space-y-8">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-black">User Directory</h3>
+                    <div class="flex gap-4">
+                        <input type="text" placeholder="Search by name/email" class="bg-white/5 border border-glass-border rounded-xl px-4 py-2 text-sm outline-none focus:border-primary">
+                        <button class="px-6 py-2 bg-primary text-white rounded-xl font-bold text-xs uppercase tracking-widest">Filters</button>
                     </div>
+                </div>
+                <div class="glass-card rounded-[2rem] overflow-hidden">
                     <table class="w-full text-left">
-                        <tbody class="divide-y divide-glass-border">
-                            <tr class="hover:bg-white/[0.02] transition-all group">
-                                <td class="px-10 py-5">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500"><span class="material-symbols-outlined text-sm">add_shopping_cart</span></div>
-                                        <div>
-                                            <p class="text-xs font-bold">New Order Placed</p>
-                                            <p class="text-[10px] text-white/20 uppercase font-black tracking-tighter">Buyer #4521 • ৳2,500 • AC Repair</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-10 py-5 text-right"><span class="text-[10px] font-black text-white/10 uppercase">Just Now</span></td>
+                        <thead class="bg-white/5 text-[10px] font-black uppercase text-white/30 tracking-widest">
+                            <tr>
+                                <th class="px-8 py-6">User Identity</th>
+                                <th class="px-8 py-6">Role</th>
+                                <th class="px-8 py-6">Earnings/Spent</th>
+                                <th class="px-8 py-6">Status</th>
+                                <th class="px-8 py-6 text-right">Control</th>
                             </tr>
-                            <tr class="hover:bg-white/[0.02] transition-all group">
-                                <td class="px-10 py-5">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm">person_add</span></div>
-                                        <div>
-                                            <p class="text-xs font-bold">New Seller Applied</p>
-                                            <p class="text-[10px] text-white/20 uppercase font-black tracking-tighter">Zahid Hasan • Gazipur • Laptop Expert</p>
-                                        </div>
-                                    </div>
+                        </thead>
+                        <tbody class="divide-y divide-glass-border text-sm font-medium">
+                            <tr>
+                                <td class="px-8 py-6">
+                                    <p class="font-bold">Sabbir Khan</p>
+                                    <p class="text-[10px] text-white/20 italic">sabbir@pro.com</p>
                                 </td>
-                                <td class="px-10 py-5 text-right"><span class="text-[10px] font-black text-white/10 uppercase">2 mins ago</span></td>
+                                <td class="px-8 py-6"><span class="px-3 py-1 bg-accent/20 text-accent text-[10px] font-black rounded-lg">SELLER</span></td>
+                                <td class="px-8 py-6">৳45,200</td>
+                                <td class="px-8 py-6 text-green-500">Active</td>
+                                <td class="px-8 py-6 text-right space-x-2">
+                                    <button class="p-2 glass-card rounded-lg hover:text-primary transition-all"><span class="material-symbols-outlined text-sm">block</span></button>
+                                    <button class="p-2 glass-card rounded-lg hover:text-white transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Other sections remain hidden for now -->
-            <div id="users" class="content-section">...</div>
-            <div id="settings" class="content-section">...</div>
+            <!-- 3. ACTIVE ORDERS -->
+            <div id="orders" class="content-section space-y-8">
+                <h3 class="text-2xl font-black">Platform Orders</h3>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="glass-card p-6 rounded-2xl flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary"><span class="material-symbols-outlined">ac_unit</span></div>
+                            <div>
+                                <p class="font-bold">AC Deep Cleaning</p>
+                                <p class="text-xs text-white/30">Buyer: Ariful Islam • Seller: Fixit Pro</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-black text-white">৳2,500</p>
+                            <span class="text-[10px] font-black uppercase text-accent">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. DISPUTES -->
+            <div id="disputes" class="content-section space-y-8 text-center py-20">
+                <span class="material-symbols-outlined text-primary text-[60px] opacity-20">verified_user</span>
+                <h3 class="text-xl font-bold mt-4">Zero Disputes Logged</h3>
+                <p class="text-white/20">All platform transactions are healthy.</p>
+            </div>
+
+            <!-- 5. FINANCIAL GATEWAY -->
+            <div id="payments" class="content-section space-y-8">
+                <h3 class="text-2xl font-black">Financial Gateway</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass-card p-8 rounded-[2.5rem]">
+                        <h4 class="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6">Commission Structure</h4>
+                        <div class="space-y-6">
+                            <div>
+                                <p class="text-xs font-bold text-white/40 mb-2">Standard Marketplace Fee (%)</p>
+                                <input type="number" value="10" class="w-full bg-white/5 border border-glass-border rounded-xl px-4 py-3 outline-none focus:border-primary">
+                            </div>
+                            <button class="w-full py-4 bg-primary text-white rounded-xl font-black uppercase text-xs tracking-widest shadow-xl shadow-primary/20">Update Logic</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. WITHDRAWALS -->
+            <div id="withdrawals" class="content-section space-y-8">
+                <h3 class="text-2xl font-black">Withdrawal Requests</h3>
+                <div class="glass-card rounded-2xl p-8 border-primary/20 bg-primary/5 text-center">
+                    <p class="text-sm font-bold text-primary animate-pulse uppercase tracking-[0.3em]">14 Pending Payouts Require Release</p>
+                    <button class="mt-6 px-10 py-3 bg-primary text-white rounded-xl font-black text-xs uppercase tracking-widest">Process Mass Payout</button>
+                </div>
+            </div>
+
+            <!-- 7. CATEGORIES -->
+            <div id="categories" class="content-section space-y-8">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-2xl font-black">Service Categories</h3>
+                    <button class="px-6 py-2 bg-primary text-white rounded-xl font-black text-xs uppercase tracking-widest">+ Add New</button>
+                </div>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass-card p-6 rounded-2xl flex items-center justify-between group cursor-pointer hover:bg-white/5">
+                        <span class="font-bold">Mobile Repair</span>
+                        <span class="material-symbols-outlined text-white/20 group-hover:text-primary">edit</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. SETTINGS -->
+            <div id="settings" class="content-section space-y-8">
+                <h3 class="text-2xl font-black">System Settings</h3>
+                <div class="max-w-2xl space-y-4">
+                    <div class="glass-card p-6 rounded-2xl flex items-center justify-between">
+                        <div>
+                            <p class="font-bold">Maintenance Mode</p>
+                            <p class="text-xs text-white/20">Restrict site access during major updates</p>
+                        </div>
+                        <div class="w-12 h-6 bg-white/10 rounded-full relative cursor-pointer" onclick="this.classList.toggle('bg-primary')">
+                            <div class="w-4 h-4 bg-white rounded-full absolute top-1 left-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </main>
 
     <script>
+        // CORE NAVIGATION LOGIC
         function showSection(id) {
+            // 1. Hide all sections
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+
+            // 2. Remove active class from all links
             document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            event.currentTarget.classList.add('active');
-            const titles = { 'dashboard': 'Dashboard Overview', 'users': 'User Management', 'settings': 'Settings' };
-            document.getElementById('sectionTitle').innerText = titles[id] || 'Admin';
+
+            // 3. Show target section
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
+            } else {
+                console.error("Section ID not found:", id);
+            }
+
+            // 4. Set target link active
+            const activeLink = document.getElementById('link-' + id);
+            if (activeLink) activeLink.classList.add('active');
+
+            // 5. Update Header Title
+            const titles = {
+                'dashboard': 'Dashboard Overview',
+                'users': 'User Management',
+                'orders': 'Active Orders Tracking',
+                'disputes': 'Dispute Resolution Center',
+                'payments': 'Financial Gateway Control',
+                'withdrawals': 'Withdrawal & Payouts',
+                'categories': 'Category & Sub-Category Logic',
+                'settings': 'Global Platform Settings'
+            };
+            document.getElementById('sectionTitle').innerText = titles[id] || 'Fixmate Admin';
         }
 
-        // --- Premium Charts Initialization ---
+        // --- CHARTS LOGIC ---
         window.onload = function() {
-            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-
-            // Create Gradient
-            const gradient = revenueCtx.createLinearGradient(0, 0, 0, 300);
+            // Revenue Chart
+            const ctx1 = document.getElementById('revChart').getContext('2d');
+            const gradient = ctx1.createLinearGradient(0, 0, 0, 300);
             gradient.addColorStop(0, 'rgba(255, 31, 113, 0.2)');
-            gradient.addColorStop(1, 'rgba(255, 31, 113, 0)');
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
-            new Chart(revenueCtx, {
+            new Chart(ctx1, {
                 type: 'line',
                 data: {
-                    labels: ['Jun 01', 'Jun 05', 'Jun 10', 'Jun 15', 'Jun 20', 'Jun 25', 'Jun 30'],
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
                     datasets: [{
-                        data: [420, 580, 490, 820, 750, 910, 845],
+                        data: [250, 480, 390, 845],
                         borderColor: '#ff1f71',
                         borderWidth: 4,
-                        pointBackgroundColor: '#ff1f71',
-                        pointBorderColor: 'rgba(255,255,255,0.1)',
-                        pointBorderWidth: 10,
-                        pointRadius: 0,
-                        pointHoverRadius: 8,
                         fill: true,
                         backgroundColor: gradient,
-                        tension: 0.4
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#ff1f71'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a1a1a', titleFont: { size: 10 }, bodyFont: { size: 12, weight: 'bold' }, padding: 15, displayColors: false } },
+                    plugins: { legend: { display: false } },
                     scales: {
-                        y: { grid: { color: 'rgba(255,255,255,0.03)', drawBorder: false }, ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 10, weight: 'bold' }, callback: value => '৳' + value + 'k' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.02)' }, ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 10, weight: 'bold' } } },
                         x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 10, weight: 'bold' } } }
                     }
                 }
             });
 
-            const catCtx = document.getElementById('categoryChart').getContext('2d');
-            new Chart(catCtx, {
+            // Share Chart
+            const ctx2 = document.getElementById('shareChart').getContext('2d');
+            new Chart(ctx2, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Electronics', 'Home Repair', 'Automotive', 'Others'],
+                    labels: ['Sellers', 'Buyers'],
                     datasets: [{
-                        data: [40, 25, 20, 15],
-                        backgroundColor: ['#ff1f71', '#ff8e3c', '#3b82f6', 'rgba(255,255,255,0.05)'],
-                        hoverOffset: 20,
-                        borderWidth: 0,
-                        cutout: '85%'
+                        data: [1842, 22670],
+                        backgroundColor: ['#ff1f71', 'rgba(255,255,255,0.05)'],
+                        borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } }
+                    plugins: { legend: { position: 'bottom', labels: { color: 'white', font: { size: 10 } } } },
+                    cutout: '80%'
                 }
             });
         };
