@@ -53,7 +53,10 @@
                 <span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
             </a>
             <a href="#" onclick="showSection('profile')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm">
-                <span class="material-symbols-outlined text-[20px]">account_circle</span> My Professional Profile
+                <span class="material-symbols-outlined text-[20px]">account_circle</span> Professional Profile
+            </a>
+            <a href="#" onclick="showSection('subscription')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm">
+                <span class="material-symbols-outlined text-[20px]">workspace_premium</span> Subscription Plans
             </a>
             <a href="#" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm">
                 <span class="material-symbols-outlined text-[20px]">home_repair_service</span> Managed Services
@@ -76,9 +79,14 @@
         <header class="h-20 border-b border-glass-border flex items-center justify-between px-8 bg-dark-bg/60 backdrop-blur-xl">
             <h2 id="sectionTitle" class="text-lg font-black">Dashboard Overview</h2>
             <div class="flex items-center gap-4">
+                <!-- Plan Indicator -->
+                <div class="px-3 py-1 bg-white/5 border border-glass-border rounded-full flex items-center gap-2">
+                    <span class="text-[9px] font-black text-white/40 uppercase tracking-widest">Active Plan:</span>
+                    <span class="text-[9px] font-black text-primary uppercase">Free Plan</span>
+                </div>
                 <div class="flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full">
                     <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-[10px] font-black text-green-500 uppercase tracking-widest">Verified Seller</span>
+                    <span class="text-[10px] font-black text-green-500 uppercase tracking-widest">Verified</span>
                 </div>
                 <div class="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary text-xs">SK</div>
             </div>
@@ -107,18 +115,66 @@
                 </div>
             </div>
 
-            <!-- 2. PROFESSIONAL PROFILE (The requested feature) -->
-            <div id="profile" class="content-section space-y-10 pb-20">
+            <!-- 2. SUBSCRIPTION PLANS (The requested feature) -->
+            <div id="subscription" class="content-section space-y-10">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h3 class="text-4xl font-black mb-4">Choose Your Growth Path</h3>
+                    <p class="text-white/40 font-medium">Unlock advanced business tools, priority listing visibility, and deep analytics with Fixmate Premium.</p>
+                </div>
 
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto pb-20">
+                    <!-- Free Plan Card -->
+                    <div class="glass-card p-10 rounded-[3rem] border-white/5 relative overflow-hidden group">
+                        <div class="mb-8">
+                            <h4 class="text-2xl font-black mb-2">Free Plan</h4>
+                            <p class="text-white/40 text-sm font-bold uppercase tracking-widest">Starter Pack</p>
+                        </div>
+                        <div class="mb-10">
+                            <h5 class="text-5xl font-black">৳0<span class="text-sm text-white/20">/month</span></h5>
+                        </div>
+                        <ul class="space-y-4 mb-12">
+                            <li class="flex items-center gap-3 text-sm font-bold text-white/60"><span class="material-symbols-outlined text-green-500 text-lg">check_circle</span> 1 Service Listing</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white/60"><span class="material-symbols-outlined text-green-500 text-lg">check_circle</span> Receive Notifications</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white/60"><span class="material-symbols-outlined text-green-500 text-lg">check_circle</span> Direct Messaging</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white/60"><span class="material-symbols-outlined text-green-500 text-lg">check_circle</span> Accept Standard Orders</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white/20"><span class="material-symbols-outlined text-lg">block</span> Priority Visibility</li>
+                        </ul>
+                        <button class="w-full py-4 bg-white/5 border border-glass-border rounded-2xl text-xs font-black uppercase tracking-widest cursor-default">Current Plan</button>
+                    </div>
+
+                    <!-- Premium Plan Card -->
+                    <div class="glass-card p-10 rounded-[3rem] border-primary/40 bg-primary/5 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-8">
+                            <span class="px-4 py-1.5 bg-primary text-white text-[10px] font-black rounded-full uppercase tracking-tighter shadow-lg shadow-primary/40">Most Popular</span>
+                        </div>
+                        <div class="mb-8">
+                            <h4 class="text-2xl font-black mb-2 text-gradient">Premium Plan</h4>
+                            <p class="text-white/40 text-sm font-bold uppercase tracking-widest">Enterprise Growth</p>
+                        </div>
+                        <div class="mb-10">
+                            <h5 class="text-5xl font-black text-white">৳999<span class="text-sm text-white/20">/month</span></h5>
+                        </div>
+                        <ul class="space-y-4 mb-12">
+                            <li class="flex items-center gap-3 text-sm font-bold text-white"><span class="material-symbols-outlined text-primary text-lg">verified</span> Unlimited Listings</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white"><span class="material-symbols-outlined text-primary text-lg">verified</span> Priority Search Visibility</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white"><span class="material-symbols-outlined text-primary text-lg">verified</span> Featured List Badges</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white"><span class="material-symbols-outlined text-primary text-lg">verified</span> Advanced Analytics Dashboard</li>
+                            <li class="flex items-center gap-3 text-sm font-bold text-white"><span class="material-symbols-outlined text-primary text-lg">verified</span> Extended Portfolio Uploads</li>
+                        </ul>
+                        <button class="w-full py-4 bg-primary text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-primary/20">Upgrade to Premium</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. PROFILE SECTION -->
+            <div id="profile" class="content-section space-y-10 pb-20">
                 <!-- Hero Profile Section -->
                 <div class="relative">
-                    <!-- Cover Photo -->
                     <div class="h-64 w-full rounded-[2.5rem] bg-gradient-to-r from-primary/20 to-accent/20 border border-glass-border relative overflow-hidden group">
                         <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all bg-black/40 cursor-pointer">
                             <span class="material-symbols-outlined text-4xl">add_a_photo</span>
                         </div>
                     </div>
-                    <!-- Profile Identity -->
                     <div class="px-12 -mt-16 flex flex-col md:flex-row items-end gap-6">
                         <div class="w-40 h-40 rounded-3xl bg-dark-bg p-1 shadow-2xl relative">
                             <div class="w-full h-full rounded-[1.2rem] bg-gradient-to-br from-primary to-accent flex items-center justify-center text-4xl font-black text-white relative group overflow-hidden">
@@ -129,94 +185,14 @@
                             </div>
                         </div>
                         <div class="pb-4 flex-1">
-                            <h3 class="text-3xl font-black mb-1 flex items-center gap-3">
-                                Sabbir Khan
-                                <span class="material-symbols-outlined text-primary fill-1 text-2xl" title="Verified Professional">verified</span>
-                            </h3>
+                            <h3 class="text-3xl font-black mb-1 flex items-center gap-3">Sabbir Khan <span class="material-symbols-outlined text-primary fill-1 text-2xl">verified</span></h3>
                             <p class="text-white/40 font-bold text-sm tracking-wide">Professional HVAC & Electrical Expert • <span class="text-primary font-black uppercase text-xs">Top Rated</span></p>
                         </div>
                         <div class="pb-4 flex gap-3">
                             <button class="px-6 py-3 bg-primary text-white rounded-xl text-xs font-black shadow-xl shadow-primary/20">Edit Profile</button>
-                            <button class="p-3 glass-card rounded-xl text-white/60 hover:text-white"><span class="material-symbols-outlined text-sm">share</span></button>
                         </div>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Left: About & Info -->
-                    <div class="lg:col-span-2 space-y-8">
-                        <div class="glass-card p-8 rounded-[2rem]">
-                            <h4 class="text-sm font-black mb-6 uppercase tracking-widest text-primary">About & Bio</h4>
-                            <p class="text-white/60 leading-relaxed font-medium">
-                                Professional AC maintenance and electrical system specialist with over 8 years of experience in high-end residential and commercial projects. Certified by Fixmate Academy and specialized in energy-efficient HVAC solutions. Dedicated to providing top-quality service with a focus on safety and reliability.
-                            </p>
-                        </div>
-
-                        <!-- Skills Tags -->
-                        <div class="glass-card p-8 rounded-[2rem]">
-                            <h4 class="text-sm font-black mb-6 uppercase tracking-widest text-primary">Service Expertise & Skills</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-4 py-2 bg-white/5 border border-glass-border rounded-xl text-xs font-bold">HVAC Repair</span>
-                                <span class="px-4 py-2 bg-white/5 border border-glass-border rounded-xl text-xs font-bold">Electrical Wiring</span>
-                                <span class="px-4 py-2 bg-white/5 border border-glass-border rounded-xl text-xs font-bold">Control PCB Repair</span>
-                                <span class="px-4 py-2 bg-white/5 border border-glass-border rounded-xl text-xs font-bold">Safety Audit</span>
-                                <span class="px-4 py-2 bg-white/5 border border-glass-border rounded-xl text-xs font-bold">Panel Board Installation</span>
-                                <button class="px-4 py-2 bg-primary/10 border border-primary/20 text-primary rounded-xl text-xs font-black">+ Add Skill</button>
-                            </div>
-                        </div>
-
-                        <!-- Portfolio Gallery -->
-                        <div class="glass-card p-8 rounded-[2rem]">
-                            <div class="flex justify-between items-center mb-8">
-                                <h4 class="text-sm font-black uppercase tracking-widest text-primary">Portfolio & Past Works</h4>
-                                <button class="text-xs font-black text-white/40 hover:text-white flex items-center gap-1">View All <span class="material-symbols-outlined text-xs">arrow_forward</span></button>
-                            </div>
-                            <div class="grid grid-cols-3 gap-4">
-                                <div class="aspect-square rounded-2xl bg-white/5 border border-glass-border flex items-center justify-center group overflow-hidden">
-                                    <span class="material-symbols-outlined opacity-20 group-hover:opacity-100 transition-all cursor-pointer">image</span>
-                                </div>
-                                <div class="aspect-square rounded-2xl bg-white/5 border border-glass-border flex items-center justify-center group overflow-hidden">
-                                    <span class="material-symbols-outlined opacity-20 group-hover:opacity-100 transition-all cursor-pointer">image</span>
-                                </div>
-                                <div class="aspect-square rounded-2xl bg-white/5 border border-glass-border flex items-center justify-center group overflow-hidden">
-                                    <span class="material-symbols-outlined opacity-20 group-hover:opacity-100 transition-all cursor-pointer">add</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Quick Stats & Social -->
-                    <div class="space-y-8">
-                        <div class="glass-card p-8 rounded-[2rem]">
-                            <h4 class="text-sm font-black mb-6 uppercase tracking-widest text-primary">Experience Summary</h4>
-                            <div class="space-y-6">
-                                <div>
-                                    <p class="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Experience</p>
-                                    <p class="font-bold">8+ Years Professional</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Completed Jobs</p>
-                                    <p class="font-bold">542 Successful Service</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] font-black text-white/20 uppercase tracking-widest mb-1">Member Since</p>
-                                    <p class="font-bold">January 2022</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Social Links -->
-                        <div class="glass-card p-8 rounded-[2rem]">
-                            <h4 class="text-sm font-black mb-6 uppercase tracking-widest text-primary">Connect & Socials</h4>
-                            <div class="flex gap-4">
-                                <a href="#" class="w-12 h-12 glass-card rounded-xl flex items-center justify-center hover:bg-primary transition-all"><span class="material-symbols-outlined text-sm">public</span></a>
-                                <a href="#" class="w-12 h-12 glass-card rounded-xl flex items-center justify-center hover:bg-primary transition-all"><span class="material-symbols-outlined text-sm">link</span></a>
-                                <a href="#" class="w-12 h-12 glass-card rounded-xl flex items-center justify-center hover:bg-primary transition-all"><span class="material-symbols-outlined text-sm">mail</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -227,14 +203,23 @@
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
 
-            document.getElementById(id).classList.add('active');
-            event.currentTarget.classList.add('active');
+            const activeSection = document.getElementById(id);
+            if (activeSection) activeSection.classList.add('active');
+
+            // Highlight sidebar link
+            const links = document.querySelectorAll('.sidebar-link');
+            links.forEach(link => {
+                if (link.getAttribute('onclick').includes(id)) {
+                    link.classList.add('active');
+                }
+            });
 
             const titles = {
                 'dashboard': 'Dashboard Overview',
-                'profile': 'My Professional Profile'
+                'profile': 'My Professional Profile',
+                'subscription': 'Subscription Management'
             };
-            document.getElementById('sectionTitle').innerText = titles[id];
+            document.getElementById('sectionTitle').innerText = titles[id] || 'Fixmate Seller';
         }
     </script>
 </body>
