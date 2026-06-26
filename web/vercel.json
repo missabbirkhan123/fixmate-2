@@ -1,9 +1,11 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/seller", "destination": "/seller.html" },
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/service", "destination": "/service.html" },
-    { "source": "/messages", "destination": "/messages.html" }
+    { "source": "/messages", "destination": "/messages.html" },
+    { "source": "/signup", "destination": "/signup.html" }
   ]
 }
