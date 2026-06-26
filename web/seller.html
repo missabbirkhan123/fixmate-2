@@ -1,340 +1,98 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Seller Portal | CreativePulse Fixmate</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Chart.js for Earnings Chart -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script id="tailwind-config">
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Seller Dashboard | Fixmate</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "tertiary-fixed": "#ffddb8",
-                        "on-primary-fixed": "#0f0069",
-                        "surface-bright": "#f8f9ff",
-                        "on-surface": "#0b1c30",
-                        "surface-container-low": "#eff4ff",
-                        "inverse-on-surface": "#eaf1ff",
-                        "secondary-fixed": "#6ffbbe",
-                        "surface-dim": "#cbdbf5",
-                        "tertiary-container": "#885500",
-                        "error-container": "#ffdad6",
-                        "surface-container-lowest": "#ffffff",
-                        "on-error-container": "#93000a",
-                        "primary-fixed": "#e2dfff",
-                        "on-error": "#ffffff",
-                        "on-tertiary-container": "#ffd4a4",
-                        "on-secondary-container": "#00714d",
-                        "on-secondary-fixed": "#002113",
-                        "tertiary": "#684000",
-                        "secondary-container": "#6cf8bb",
-                        "background": "#f8f9ff",
-                        "surface": "#f8f9ff",
-                        "secondary-fixed-dim": "#4edea3",
-                        "on-secondary": "#ffffff",
-                        "secondary": "#006c49",
-                        "on-background": "#0b1c30",
-                        "outline": "#777587",
-                        "on-surface-variant": "#464555",
-                        "on-secondary-fixed-variant": "#005236",
-                        "surface-variant": "#d3e4fe",
-                        "surface-container-highest": "#d3e4fe",
-                        "on-primary-container": "#dad7ff",
-                        "inverse-primary": "#c3c0ff",
+                    colors: {
                         "primary": "#3525cd",
-                        "on-tertiary": "#ffffff",
-                        "surface-container": "#e5eeff",
-                        "inverse-surface": "#213145",
-                        "error": "#ba1a1a",
-                        "on-tertiary-fixed": "#2a1700",
-                        "primary-container": "#4f46e5",
-                        "on-primary": "#ffffff",
-                        "outline-variant": "#c7c4d8",
-                        "tertiary-fixed-dim": "#ffb95f",
-                        "on-primary-fixed-variant": "#3323cc",
-                        "on-tertiary-fixed-variant": "#653e00",
-                        "surface-tint": "#4d44e3",
-                        "primary-fixed-dim": "#c3c0ff",
-                        "surface-container-high": "#dce9ff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "margin-desktop": "32px",
-                        "sidebar-width": "280px",
-                        "gutter": "24px",
-                        "margin-mobile": "16px",
-                        "container-max": "1280px",
-                        "sidebar-collapsed": "80px",
-                        "unit": "4px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "body-sm": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "display-lg": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "label-md": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "body-md": ["Inter"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
-                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
-                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "1.5", "fontWeight": "400" }],
-                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
-                        "headline-lg": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                        "background": "#f8f9ff",
+                        "surface": "#ffffff"
                     }
-                },
-            },
-        }
-    </script>
-<style>
-        body { font-family: 'Inter', sans-serif; }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .card-shadow {
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.06);
-        }
-        .card-shadow:hover {
-            box-shadow: 0px 4px 12px rgba(0,0,0,0.08), 0px 2px 4px rgba(0,0,0,0.04);
-        }
-    </style>
-</head>
-<body class="bg-background text-on-surface">
-
-<!-- New Booking Notification (Mockup) -->
-<div id="notification-toast" class="fixed top-5 right-5 z-[100] hidden">
-    <div class="bg-primary text-on-primary px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 animate-bounce">
-        <span class="material-symbols-outlined">notifications_active</span>
-        <div>
-            <p class="font-bold">New Booking Received!</p>
-            <p class="text-sm">AC Maintenance for Gulshan-2</p>
-        </div>
-        <button onclick="this.parentElement.parentElement.classList.add('hidden')" class="ml-4">
-            <span class="material-symbols-outlined">close</span>
-        </button>
-    </div>
-</div>
-
-<!-- Sidebar -->
-<aside class="hidden md:flex flex-col h-screen w-sidebar-width fixed left-0 top-0 bg-inverse-surface py-6 z-50">
-    <div class="px-6 mb-8">
-        <h1 class="font-headline-md text-headline-md text-on-primary-fixed">Fixmate</h1>
-        <p class="text-surface-variant font-label-md">Seller Portal</p>
-    </div>
-    <nav class="flex-1 space-y-1">
-        <a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container border-l-4 border-primary font-label-md text-label-md" href="#">
-            <span class="material-symbols-outlined">dashboard</span> Dashboard
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all font-label-md text-label-md" href="#service-management">
-            <span class="material-symbols-outlined">home_repair_service</span> Service Management
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all font-label-md text-label-md" href="#">
-            <span class="material-symbols-outlined">shopping_cart</span> Orders
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all font-label-md text-label-md" href="/messages">
-            <span class="material-symbols-outlined">forum</span> Messages
-        </a>
-    </nav>
-</aside>
-
-<!-- Main Content -->
-<main class="md:ml-sidebar-width min-h-screen p-margin-mobile md:p-margin-desktop space-y-8">
-
-    <header class="flex justify-between items-center">
-        <div>
-            <h2 class="font-headline-lg text-headline-lg">Service Provider Dashboard</h2>
-            <p class="text-on-surface-variant font-body-md">Real-time business analytics and service tracking.</p>
-        </div>
-        <button onclick="document.getElementById('notification-toast').classList.remove('hidden')" class="p-3 bg-surface-container rounded-full relative">
-            <span class="material-symbols-outlined">notifications</span>
-            <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
-        </button>
-    </header>
-
-    <!-- Earnings & Orders Stats -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30">
-            <p class="text-on-surface-variant font-label-md uppercase">Total Earnings</p>
-            <h4 class="text-3xl font-bold text-primary">৳145,200</h4>
-            <p class="text-secondary text-sm font-medium mt-2 flex items-center gap-1">
-                <span class="material-symbols-outlined text-sm">trending_up</span> +15% from last month
-            </p>
-        </div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30">
-            <p class="text-on-surface-variant font-label-md uppercase">Today's Earnings</p>
-            <h4 class="text-3xl font-bold text-secondary">৳4,500</h4>
-            <p class="text-on-surface-variant text-sm mt-2">3 completed bookings</p>
-        </div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30">
-            <p class="text-on-surface-variant font-label-md uppercase">Total Orders</p>
-            <h4 class="text-3xl font-bold text-on-surface">124</h4>
-            <div class="flex gap-4 mt-2 text-xs font-semibold">
-                <span class="text-secondary">86 Completed</span>
-                <span class="text-error">12 Cancelled</span>
-            </div>
-        </div>
-        <div class="bg-surface-container-lowest p-6 rounded-2xl card-shadow border border-outline-variant/30">
-            <p class="text-on-surface-variant font-label-md uppercase">Active Services</p>
-            <h4 class="text-3xl font-bold text-tertiary">12</h4>
-            <p class="text-on-surface-variant text-sm mt-2">All categories live</p>
-        </div>
-    </div>
-
-    <!-- Earnings Chart -->
-    <div class="bg-surface-container-lowest p-8 rounded-2xl card-shadow border border-outline-variant/30">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold">Earnings Analytics</h3>
-            <select class="bg-surface-container border-none rounded-lg text-sm px-4 py-2">
-                <option>Weekly View</option>
-                <option>Monthly View</option>
-            </select>
-        </div>
-        <div class="h-[300px]">
-            <canvas id="earningsChart"></canvas>
-        </div>
-    </div>
-
-    <!-- Service Management Section -->
-    <section id="service-management" class="space-y-6">
-        <div class="flex justify-between items-center">
-            <h3 class="text-2xl font-bold">Service Management</h3>
-            <button onclick="openModal()" class="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-bold hover:scale-105 transition-all shadow-lg">
-                <span class="material-symbols-outlined">add</span> Add New Service
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Service Item 1 -->
-            <div class="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/30 flex gap-6 items-center group relative">
-                <div class="w-24 h-24 bg-surface-variant rounded-xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7955?auto=format&fit=crop&w=200" class="w-full h-full object-cover">
-                </div>
-                <div class="flex-1">
-                    <div class="flex justify-between">
-                        <h4 class="font-bold text-lg">AC Maintenance & Cleaning</h4>
-                        <span class="text-xs bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full">Available</span>
-                    </div>
-                    <p class="text-on-surface-variant text-sm mb-2">Category: Home Repair</p>
-                    <p class="font-bold text-primary">৳2,500</p>
-                </div>
-                <div class="flex gap-2">
-                    <button class="p-2 hover:bg-primary-container rounded-lg text-primary"><span class="material-symbols-outlined">edit</span></button>
-                    <button class="p-2 hover:bg-error-container rounded-lg text-error"><span class="material-symbols-outlined">delete</span></button>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- Add Service Modal -->
-<div id="service-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4">
-    <div class="bg-surface rounded-3xl w-full max-w-2xl overflow-hidden animate-fade-in shadow-2xl">
-        <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container">
-            <h3 class="text-xl font-bold">Add New Service</h3>
-            <button onclick="closeModal()" class="material-symbols-outlined">close</button>
-        </div>
-        <form class="p-8 space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-2">
-                    <label class="font-bold text-sm">Service Title</label>
-                    <input type="text" placeholder="e.g. Master AC Repair" class="w-full bg-surface-container border-none rounded-xl p-4 focus:ring-2 focus:ring-primary">
-                </div>
-                <div class="space-y-2">
-                    <label class="font-bold text-sm">Category</label>
-                    <select class="w-full bg-surface-container border-none rounded-xl p-4">
-                        <option>AC Repair</option>
-                        <option>Electrical</option>
-                        <option>Plumbing</option>
-                        <option>Cleaning</option>
-                    </select>
-                </div>
-                <div class="space-y-2">
-                    <label class="font-bold text-sm">Service Price (৳)</label>
-                    <input type="number" placeholder="2500" class="w-full bg-surface-container border-none rounded-xl p-4">
-                </div>
-                <div class="space-y-2">
-                    <label class="font-bold text-sm">Availability</label>
-                    <div class="flex items-center gap-4 mt-2">
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="radio" name="status" checked class="text-primary"> Available
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="radio" name="status" class="text-primary"> Unavailable
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="space-y-2">
-                <label class="font-bold text-sm">Service Media (Images/Videos)</label>
-                <div class="border-2 border-dashed border-outline-variant rounded-2xl p-8 text-center bg-surface-container hover:bg-surface-variant/20 transition-all cursor-pointer">
-                    <span class="material-symbols-outlined text-4xl text-outline mb-2">upload_file</span>
-                    <p class="text-on-surface-variant">Click to upload images or drag and drop</p>
-                    <p class="text-xs text-outline-variant mt-1">PNG, JPG or MP4 (Max. 10MB)</p>
-                </div>
-            </div>
-            <div class="flex gap-4 pt-4">
-                <button type="button" onclick="closeModal()" class="flex-1 py-4 bg-surface-container rounded-xl font-bold">Cancel</button>
-                <button type="submit" class="flex-1 py-4 bg-primary text-on-primary rounded-xl font-bold shadow-lg">Save Service</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    // Earnings Chart Configuration
-    const ctx = document.getElementById('earningsChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-            datasets: [{
-                label: 'Earnings (৳)',
-                data: [12000, 19000, 15000, 25000, 22000, 30000, 28000],
-                borderColor: '#3525cd',
-                backgroundColor: 'rgba(53, 37, 205, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 6,
-                pointBackgroundColor: '#3525cd'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { beginAtZero: true, grid: { color: '#e5eeff' } },
-                x: { grid: { display: false } }
+                }
             }
         }
-    });
+    </script>
+</head>
+<body class="bg-background text-slate-900">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-white p-6 hidden md:block">
+            <a href="index.html" class="text-2xl font-black text-white">Fixmate</a>
+            <p class="text-slate-400 text-xs mt-1 uppercase tracking-widest font-bold">Seller Portal</p>
 
-    // Modal Logic
-    function openModal() { document.getElementById('service-modal').classList.remove('hidden'); }
-    function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
+            <nav class="mt-12 space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-primary rounded-xl font-bold">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-bold">
+                    <span class="material-symbols-outlined">home_repair_service</span> Services
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-bold">
+                    <span class="material-symbols-outlined">shopping_cart</span> Orders
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-bold">
+                    <span class="material-symbols-outlined">forum</span> Messages
+                </a>
+            </nav>
+        </aside>
 
-    // Simple Auto-Notification Simulator
-    setTimeout(() => {
-        document.getElementById('notification-toast').classList.remove('hidden');
-    }, 5000);
-</script>
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold">Welcome back, Sarah</h2>
+                    <p class="text-slate-500">Manage your business growth and listings.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-600">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">SK</div>
+                </div>
+            </header>
 
-</body></html>
+            <!-- Pending Approval Banner -->
+            <div id="approval-banner" class="bg-orange-50 border border-orange-100 p-6 rounded-3xl mb-12 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-orange-900">Complete Your Setup</h3>
+                        <p class="text-orange-700 text-sm">Payment verification pending. Complete manual payment to unlock listings.</p>
+                    </div>
+                </div>
+                <button onclick="this.parentElement.remove()" class="px-6 py-3 bg-orange-600 text-white rounded-xl font-bold hover:bg-orange-700 transition-all">Submit Details</button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-50">
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-4">Total Earnings</p>
+                    <h4 class="text-4xl font-black text-slate-900">৳45.2k</h4>
+                    <p class="text-green-600 text-sm font-bold mt-4">+12% increase</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-50">
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-4">Active Listings</p>
+                    <h4 class="text-4xl font-black text-slate-900">08</h4>
+                    <p class="text-slate-400 text-sm mt-4">2 draft services</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-50 text-white bg-primary">
+                    <p class="text-blue-200 text-xs font-bold uppercase tracking-widest mb-4">Pending Orders</p>
+                    <h4 class="text-4xl font-black">24</h4>
+                    <p class="text-blue-100 text-sm mt-4">Action required</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

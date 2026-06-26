@@ -1,165 +1,127 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Admin Dashboard | CreativePulse Fixmate</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind Configuration -->
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                "tertiary-fixed": "#ffddb8",
-                "on-primary-fixed": "#0f0069",
-                "surface-bright": "#f8f9ff",
-                "on-surface": "#0b1c30",
-                "surface-container-low": "#eff4ff",
-                "inverse-on-surface": "#eaf1ff",
-                "secondary-fixed": "#6ffbbe",
-                "surface-dim": "#cbdbf5",
-                "tertiary-container": "#885500",
-                "error-container": "#ffdad6",
-                "surface-container-lowest": "#ffffff",
-                "on-error-container": "#93000a",
-                "primary-fixed": "#e2dfff",
-                "on-error": "#ffffff",
-                "on-tertiary-container": "#ffd4a4",
-                "on-secondary-container": "#00714d",
-                "on-secondary-fixed": "#002113",
-                "tertiary": "#684000",
-                "secondary-container": "#6cf8bb",
-                "background": "#f8f9ff",
-                "surface": "#f8f9ff",
-                "secondary-fixed-dim": "#4edea3",
-                "on-secondary": "#ffffff",
-                "secondary": "#006c49",
-                "on-background": "#0b1c30",
-                "outline": "#777587",
-                "on-surface-variant": "#464555",
-                "on-secondary-fixed-variant": "#005236",
-                "surface-variant": "#d3e4fe",
-                "surface-container-highest": "#d3e4fe",
-                "on-primary-container": "#dad7ff",
-                "inverse-primary": "#c3c0ff",
-                "primary": "#3525cd",
-                "on-tertiary": "#ffffff",
-                "surface-container": "#e5eeff",
-                "inverse-surface": "#213145",
-                "error": "#ba1a1a",
-                "on-tertiary-fixed": "#2a1700",
-                "primary-container": "#4f46e5",
-                "on-primary": "#ffffff",
-                "outline-variant": "#c7c4d8",
-                "tertiary-fixed-dim": "#ffb95f",
-                "on-primary-fixed-variant": "#3323cc",
-                "on-tertiary-fixed-variant": "#653e00",
-                "surface-tint": "#4d44e3",
-                "primary-fixed-dim": "#c3c0ff",
-                "surface-container-high": "#dce9ff"
-            },
-            "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-            },
-            "spacing": {
-                "margin-desktop": "32px",
-                "sidebar-width": "280px",
-                "gutter": "24px",
-                "margin-mobile": "16px",
-                "container-max": "1280px",
-                "sidebar-collapsed": "80px",
-                "unit": "4px"
-            },
-            "fontFamily": {
-                "headline-md": ["Inter"],
-                "headline-lg-mobile": ["Inter"],
-                "body-sm": ["Inter"],
-                "label-sm": ["Inter"],
-                "display-lg": ["Inter"],
-                "body-lg": ["Inter"],
-                "label-md": ["Inter"],
-                "headline-lg": ["Inter"],
-                "body-md": ["Inter"]
-            },
-            "fontSize": {
-                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
-                "headline-lg-mobile": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
-                "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
-                "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
-                "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                "body-lg": ["18px", {"lineHeight": "1.5", "fontWeight": "400"}],
-                "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Dashboard | Fixmate</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3525cd",
+                        "background": "#f8f9ff",
+                        "surface": "#ffffff"
+                    }
+                }
             }
-          }
         }
-      }
     </script>
-<style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9ff;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .custom-shadow-1 {
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.06);
-        }
-    </style>
 </head>
-<body class="flex min-h-screen bg-background overflow-hidden">
-<!-- SideNavBar Component -->
-<aside class="h-screen w-sidebar-width fixed left-0 top-0 bg-inverse-surface flex flex-col py-6 z-50">
-<div class="px-6 mb-10 flex items-center gap-3">
-<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">storefront</span>
-</div>
-<div>
-<h1 class="font-headline-md text-headline-md text-on-primary-fixed leading-tight">Fixmate Admin</h1>
-</div>
-</div>
-<nav class="flex-1 space-y-1 overflow-y-auto scrollbar-hide px-2">
-<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container border-l-4 border-primary transition-all" href="/">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="font-label-md text-label-md">Public Home</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-surface-variant hover:bg-surface-variant/10 transition-all" href="#">
-<span class="material-symbols-outlined">person_check</span>
-<span class="font-label-md text-label-md">User Approvals</span>
-<span class="ml-auto bg-error text-white text-[10px] px-1.5 py-0.5 rounded-full">12</span>
-</a>
-</nav>
-</aside>
-<!-- Main Content Area -->
-<main class="flex-1 ml-sidebar-width h-screen overflow-y-auto bg-surface p-margin-desktop">
-<header class="flex justify-between items-center w-full max-w-container-max mx-auto h-16 mb-8">
-<div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface">Admin Dashboard</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Overview of marketplace performance and operations.</p>
-</div>
-</header>
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-10 max-w-container-max mx-auto">
-<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant custom-shadow-1">
-<h4 class="font-label-md text-label-md text-on-surface-variant">Total Users</h4>
-<p class="font-display-lg text-display-lg text-on-surface mt-1">24,512</p>
-</div>
-<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant custom-shadow-1">
-<h4 class="font-label-md text-label-md text-on-surface-variant">Total Sellers</h4>
-<p class="font-display-lg text-display-lg text-on-surface mt-1">1,842</p>
-</div>
-</section>
-</main>
-</body></html>
+<body class="bg-background text-slate-900">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 text-white p-6 hidden md:block">
+            <a href="index.html" class="text-2xl font-black text-white">Fixmate</a>
+            <p class="text-slate-400 text-xs mt-1 uppercase tracking-widest font-bold">Admin Portal</p>
+
+            <nav class="mt-12 space-y-2">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-primary rounded-xl font-bold">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-bold">
+                    <span class="material-symbols-outlined">person_check</span> User Approvals
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-bold">
+                    <span class="material-symbols-outlined">payments</span> Verification
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-xl transition-all font-bold">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold">Admin Panel</h2>
+                    <p class="text-slate-500">Overview of marketplace operations.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9O7nZT8hmDfzYP8KHUfVPfy6ktxdyccCCPksPJkK0_fG0gkIJMwn7hPDlQh2VlMAycPjMtLSvcXEQ28Fu_4Eg152LOMvPvlMNNhHkkeJCQu7LhYqQpe-LrBoiPpQGV6l-gNSHcnGHV4KptI-gm4_sT02aeKmc2wK5tvxPyXw-d0OI2e_QD-L-YmqCfypQsxo0LE-EoGevQpp32HclXvOJCdJ9QqJhl-siJapK355ezAC9lJSGR67sw4lTyUF33Xv_b-ftHivwu1A" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <p class="font-bold text-sm">Alex Rivera</p>
+                        <p class="text-xs text-slate-500 font-bold uppercase">Super Admin</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <p class="text-slate-400 text-xs font-bold uppercase mb-2">Total Users</p>
+                    <h4 class="text-2xl font-black">24,512</h4>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <p class="text-slate-400 text-xs font-bold uppercase mb-2">Total Sellers</p>
+                    <h4 class="text-2xl font-black">1,842</h4>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <p class="text-orange-600 text-xs font-bold uppercase mb-2">Pending</p>
+                    <h4 class="text-2xl font-black">128</h4>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <p class="text-green-600 text-xs font-bold uppercase mb-2">Revenue</p>
+                    <h4 class="text-2xl font-black">৳45.2k</h4>
+                </div>
+            </div>
+
+            <!-- Approval Queue -->
+            <div class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+                <div class="p-8 border-b border-slate-50 flex justify-between items-center">
+                    <h3 class="text-xl font-bold">Pending Seller Approvals</h3>
+                    <button class="text-primary font-bold hover:underline">View All</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-slate-50">
+                                <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Seller</th>
+                                <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Category</th>
+                                <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="px-8 py-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-slate-100"></div>
+                                        <div>
+                                            <p class="font-bold">Johnathan Miller</p>
+                                            <p class="text-xs text-slate-500">j.miller@service.com</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-6 text-sm font-medium">Web Development</td>
+                                <td class="px-8 py-6">
+                                    <div class="flex gap-2">
+                                        <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg"><span class="material-symbols-outlined">check_circle</span></button>
+                                        <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg"><span class="material-symbols-outlined">cancel</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Sign In | Fixmate Marketplace</title>
+    <title>Sign In | Fixmate</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -26,7 +26,7 @@
     <div class="min-h-screen flex flex-col items-center justify-center p-6">
         <div class="max-w-md w-full space-y-8 bg-surface p-10 rounded-3xl shadow-xl border border-slate-100">
             <div class="text-center">
-                <a href="/" class="text-3xl font-black text-primary">Fixmate</a>
+                <a href="index.html" class="text-3xl font-black text-primary">Fixmate</a>
                 <h2 class="mt-6 text-3xl font-bold tracking-tight">Welcome back</h2>
                 <p class="mt-2 text-sm text-slate-500">Please sign in to your account</p>
             </div>
@@ -60,7 +60,7 @@
 
             <p class="text-center text-sm text-slate-500">
                 Don't have an account?
-                <a href="/signup" class="font-bold text-primary hover:underline">Sign up for free</a>
+                <a href="signup.html" class="font-bold text-primary hover:underline">Sign up for free</a>
             </p>
         </div>
     </div>
@@ -69,12 +69,15 @@
         document.getElementById('signin-form').onsubmit = function(e) {
             e.preventDefault();
             const email = document.getElementById('email-address').value;
-            // Mock logic: If email contains 'seller', go to seller dashboard, else go to home
-            alert('Sign In Successful! Welcome back.');
-            if(email.toLowerCase().includes('seller')) {
-                location.href = '/seller';
+            alert('Sign In Successful! Redirecting to your dashboard...');
+
+            const lowerEmail = email.toLowerCase();
+            if(lowerEmail.includes('admin')) {
+                location.href = 'admin.html';
+            } else if(lowerEmail.includes('seller')) {
+                location.href = 'seller.html';
             } else {
-                location.href = '/';
+                location.href = 'buyer.html';
             }
         };
     </script>
