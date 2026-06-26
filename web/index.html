@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Fixmate | Premium Multi-Vendor Marketplace</title>
+    <title>Fixmate | Advanced Service Marketplace</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -42,17 +42,17 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .nav-link { color: rgba(255, 255, 255, 0.6); transition: all 0.3s; }
-        .nav-link:hover { color: #ffffff; }
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0b0e14; }
         ::-webkit-scrollbar-thumb { background: #ff1f71; border-radius: 10px; }
+        .category-chip { transition: all 0.3s; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .category-chip:hover { border-color: #ff1f71; background: rgba(255, 31, 113, 0.1); }
+        .category-active { background: #ff1f71 !important; border-color: #ff1f71 !important; color: white !important; }
     </style>
 </head>
 <body class="antialiased">
     <div class="mesh-bg"></div>
 
-    <!-- Navigation -->
     <nav class="sticky top-0 z-50 border-b border-glass-border bg-dark-bg/60 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
@@ -62,9 +62,8 @@
                         Fixmate
                     </a>
                 </div>
-
                 <div class="flex items-center gap-4">
-                    <a href="signin.html" class="hidden sm:block text-sm font-bold nav-link">Log In</a>
+                    <a href="signin.html" class="text-sm font-bold opacity-60 hover:opacity-100 transition-all">Log In</a>
                     <a href="signup.html" class="px-6 py-2.5 bg-white text-dark-bg rounded-full text-sm font-bold hover:scale-105 transition-all">Join Free</a>
                 </div>
             </div>
@@ -73,16 +72,16 @@
 
     <main class="relative px-6">
         <!-- Hero Section -->
-        <section class="max-w-5xl mx-auto pt-16 pb-20 text-center">
+        <section class="max-w-5xl mx-auto pt-16 pb-12 text-center">
             <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight tracking-tight">
-                Marketplace for <span class="text-gradient">Everything.</span>
+                Marketplace for <span class="text-gradient">Repairs.</span>
             </h1>
 
             <!-- Search Bar -->
-            <div class="max-w-3xl mx-auto glass-card p-2 rounded-2xl flex flex-col md:flex-row gap-2 shadow-2xl">
+            <div class="max-w-4xl mx-auto glass-card p-2 rounded-2xl flex flex-col md:flex-row gap-2 shadow-2xl">
                 <div class="flex-1 flex items-center gap-3 px-6 py-4 rounded-xl focus-within:bg-white/5 transition-all">
                     <span class="material-symbols-outlined text-white/30">search</span>
-                    <input type="text" id="mainSearch" onkeyup="filterPosts()" placeholder="Search from 200+ demo posts..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder:text-white/20 font-medium">
+                    <input type="text" id="mainSearch" onkeyup="filterPosts()" placeholder="Search services, parts, or jobs..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder:text-white/20 font-medium">
                 </div>
                 <button class="px-10 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-black hover:opacity-90 active:scale-95 transition-all">
                     Search
@@ -90,65 +89,123 @@
             </div>
         </section>
 
+        <!-- Category Horizontal Browser -->
+        <section class="max-w-7xl mx-auto mb-10">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-black uppercase tracking-widest text-white/40">Select Category</h3>
+                <button onclick="resetCategory()" class="text-xs font-bold text-primary hover:underline">Clear Filter</button>
+            </div>
+            <div id="categoryContainer" class="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
+                <!-- Categories will be injected here -->
+            </div>
+        </section>
+
         <!-- Marketplace Feed -->
-        <section class="max-w-7xl mx-auto py-10">
-            <!-- Feed Tabs -->
+        <section class="max-w-7xl mx-auto py-4">
             <div class="flex justify-center gap-4 mb-12">
                 <button onclick="switchTab('seller')" id="tabSeller" class="px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary">
-                    Services Available (100)
+                    Services Available
                 </button>
                 <button onclick="switchTab('buyer')" id="tabBuyer" class="px-8 py-3 rounded-full font-bold transition-all bg-white/5 text-white/60 border border-glass-border">
-                    Jobs Posted (100)
+                    Jobs Posted
                 </button>
             </div>
 
-            <!-- Grid -->
             <div id="postGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Posts will be injected here by JS -->
+                <!-- Posts will be injected here -->
             </div>
         </section>
     </main>
 
     <footer class="mt-20 py-10 border-t border-glass-border text-center">
-        <p class="text-white/20 text-sm">© 2024 Fixmate Demo Marketplace. 200 Mock Posts Generated.</p>
+        <p class="text-white/20 text-sm">© 2024 Fixmate Service Directory. 200+ Dynamic Categories Integrated.</p>
     </footer>
 
     <script>
+        // FULL CATEGORY DATA
+        const categories = {
+            "Mobile Phone": ["Screen Replacement", "Battery Replacement", "Charging Port", "Motherboard Repair", "Data Recovery"],
+            "Laptop & Computer": ["Keyboard Replacement", "RAM Upgrade", "SSD Upgrade", "OS Installation", "Virus Removal"],
+            "Printer": ["Head Cleaning", "Paper Jam", "Ink System", "Connectivity Repair"],
+            "Home Appliance": ["Refrigerator", "Washing Machine", "Microwave", "Air Conditioner", "Electric Fan"],
+            "Television": ["LED Panel", "Backlight Repair", "Main Board Repair"],
+            "Smart Device": ["Smart Watch", "Tablet", "Security Camera"],
+            "Electrical": ["Switch Repair", "Wiring", "Circuit Breaker", "Ceiling Light"],
+            "Plumbing": ["Pipe Leak", "Water Pump", "Toilet Flush", "Water Heater"],
+            "Furniture": ["Chair Repair", "Sofa Repair", "Lock Repair", "Glass Replacement"],
+            "Bicycle": ["Tire Repair", "Brake Repair", "Gear Adjustment"],
+            "Motorcycle": ["Engine Repair", "Tire Replacement", "Oil Leak Repair"],
+            "Car": ["Engine Repair", "Transmission", "AC Repair", "ECU Repair"],
+            "Generator": ["Engine Repair", "Alternator", "Fuel System"],
+            "Solar System": ["Panel Cleaning", "Inverter Repair", "Battery Replacement"],
+            "CCTV": ["Camera Repair", "DVR/NVR Repair", "Cable Repair"],
+            "Door & Lock": ["Lock Replacement", "Smart Lock", "Hinge Repair"],
+            "Kitchen": ["Gas Stove", "Water Purifier", "Oven Repair"],
+            "Power Tool": ["Drill Machine", "Grinder", "Air Compressor"]
+        };
+
+        const categoryIcons = {
+            "Mobile Phone": "smartphone", "Laptop & Computer": "laptop_mac", "Printer": "print",
+            "Home Appliance": "refrigerator", "Television": "tv", "Smart Device": "watch",
+            "Electrical": "bolt", "Plumbing": "plumbing", "Furniture": "chair",
+            "Bicycle": "pedal_bike", "Motorcycle": "motorcycle", "Car": "directions_car",
+            "Generator": "generator", "Solar System": "solar_power", "CCTV": "videocam",
+            "Door & Lock": "lock", "Kitchen": "cooking", "Power Tool": "build"
+        };
+
         let currentTab = 'seller';
+        let selectedCategory = null;
         const sellerPosts = [];
         const buyerPosts = [];
 
-        // Generate 100 Seller Posts
-        const categories = ["Electrician", "Plumber", "AC Tech", "Cleaner", "Painter", "Gardener", "Carpenter", "Web Dev"];
+        // Generate 200 Demo Posts using the new Categories
+        const catKeys = Object.keys(categories);
         const locations = ["Dhaka", "Chittagong", "Sylhet", "Rajshahi", "Khulna"];
 
-        for (let i = 1; i <= 100; i++) {
-            const cat = categories[Math.floor(Math.random() * categories.length)];
+        for (let i = 1; i <= 200; i++) {
+            const mainCat = catKeys[Math.floor(Math.random() * catKeys.length)];
+            const subCat = categories[mainCat][Math.floor(Math.random() * categories[mainCat].length)];
             const loc = locations[Math.floor(Math.random() * locations.length)];
-            sellerPosts.push({
-                id: i,
-                type: 'seller',
-                title: `Expert ${cat} - Service #${i}`,
-                category: cat,
-                location: loc,
-                price: `${(Math.random() * 5000 + 500).toFixed(0)} BDT`,
-                rating: (Math.random() * 1.5 + 3.5).toFixed(1)
+
+            if (i <= 100) {
+                sellerPosts.push({
+                    id: i, type: 'seller', title: `Expert ${subCat} Service - Pro #${i}`,
+                    mainCat: mainCat, category: subCat, location: loc,
+                    price: `${(Math.random() * 5000 + 500).toFixed(0)} BDT`, rating: (Math.random() * 1.5 + 3.5).toFixed(1)
+                });
+            } else {
+                buyerPosts.push({
+                    id: i, type: 'buyer', title: `Need ${subCat} urgently at ${loc}`,
+                    mainCat: mainCat, category: subCat, location: loc,
+                    budget: `${(Math.random() * 3000 + 200).toFixed(0)} BDT`, posted: `${i-100}h ago`
+                });
+            }
+        }
+
+        function initCategories() {
+            const container = document.getElementById('categoryContainer');
+            catKeys.forEach(cat => {
+                const icon = categoryIcons[cat] || 'settings';
+                container.innerHTML += `
+                    <div onclick="selectCategory(this, '${cat}')" class="category-chip flex-shrink-0 px-5 py-3 rounded-2xl glass-card flex items-center gap-3">
+                        <span class="material-symbols-outlined text-lg">${icon}</span>
+                        <span class="text-sm font-bold whitespace-nowrap">${cat}</span>
+                    </div>
+                `;
             });
         }
 
-        // Generate 100 Buyer Posts
-        for (let i = 1; i <= 100; i++) {
-            const cat = categories[Math.floor(Math.random() * categories.length)];
-            const loc = locations[Math.floor(Math.random() * locations.length)];
-            buyerPosts.push({
-                id: i,
-                type: 'buyer',
-                title: `Need Urgent ${cat} at ${loc}`,
-                category: cat,
-                location: loc,
-                budget: `${(Math.random() * 3000 + 200).toFixed(0)} BDT`,
-                posted: `${i}h ago`
-            });
+        function selectCategory(el, cat) {
+            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('category-active'));
+            el.classList.add('category-active');
+            selectedCategory = cat;
+            filterPosts();
+        }
+
+        function resetCategory() {
+            document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('category-active'));
+            selectedCategory = null;
+            filterPosts();
         }
 
         function renderPosts(posts) {
@@ -156,7 +213,7 @@
             grid.innerHTML = '';
             posts.forEach(post => {
                 const isSeller = post.type === 'seller';
-                const card = `
+                grid.innerHTML += `
                     <div class="glass-card p-6 rounded-3xl hover:bg-white/5 transition-all cursor-pointer group border border-glass-border">
                         <div class="flex justify-between items-start mb-4">
                             <span class="text-[10px] px-2 py-1 rounded-md bg-white/10 font-bold uppercase tracking-widest text-white/50">${post.category}</span>
@@ -178,7 +235,6 @@
                         </div>
                     </div>
                 `;
-                grid.innerHTML += card;
             });
         }
 
@@ -190,26 +246,25 @@
             if (tab === 'seller') {
                 btnSeller.className = "px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary";
                 btnBuyer.className = "px-8 py-3 rounded-full font-bold transition-all bg-white/5 text-white/60 border border-glass-border";
-                renderPosts(sellerPosts);
             } else {
                 btnBuyer.className = "px-8 py-3 rounded-full font-bold transition-all bg-primary text-white border border-primary";
                 btnSeller.className = "px-8 py-3 rounded-full font-bold transition-all bg-white/5 text-white/60 border border-glass-border";
-                renderPosts(buyerPosts);
             }
+            filterPosts();
         }
 
         function filterPosts() {
             const query = document.getElementById('mainSearch').value.toLowerCase();
             const data = currentTab === 'seller' ? sellerPosts : buyerPosts;
-            const filtered = data.filter(p =>
-                p.title.toLowerCase().includes(query) ||
-                p.category.toLowerCase().includes(query) ||
-                p.location.toLowerCase().includes(query)
-            );
+            const filtered = data.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
+                const matchesCat = selectedCategory ? p.mainCat === selectedCategory : true;
+                return matchesSearch && matchesCat;
+            });
             renderPosts(filtered);
         }
 
-        // Initial Load
+        initCategories();
         renderPosts(sellerPosts);
     </script>
 </body>
